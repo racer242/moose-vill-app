@@ -1,0 +1,186 @@
+.g4-countdown {
+  color: rgba(0, 255, 255, 0.8) !important;
+}
+
+.g4-score {
+  color: rgba(0, 255, 255, 0.8) !important;
+}
+
+.g4-gameScene {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+}
+
+.g4-parallax1,
+.g4-parallax2,
+.g4-parallax3 {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-repeat: repeat-x;
+  background-size: cover;
+  background-position-x: 0;
+  background-position-y: center;
+  transition-property: background-position-x;
+  transition-timing-function: steps(100);
+}
+
+.g4-parallax3 {
+  height: 97px;
+  background-image: url(../images/game4/plan1.png);
+}
+
+.g4-parallax2 {
+  height: 231px;
+  bottom: 0px;
+  background-image: url(../images/game4/plan2.png);
+}
+
+.g4-parallax1 {
+  background-image: url(../images/game4/plan3.png);
+  height: 100%;
+}
+
+.g4-columns {
+  position: absolute;
+  display: block;
+  top: 0px;
+  transition-property: transform;
+  transition-timing-function: steps(100);
+}
+
+.g4-column {
+  position: absolute;
+  display: block;
+}
+
+.g4-columnTop {
+  flex: auto;
+  position: absolute;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.g4-columnBottom {
+  position: absolute;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.g4-hero,
+.g4-hero-flame,
+.g4-hero-flame-container,
+.g4-hero-guitar,
+.g4-hero-cap,
+.g4-hero-glasses {
+  position: absolute;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: all 200ms ease-out;
+}
+
+.g4-hero-flame-container {
+  left: 0px;
+  top: 22px;
+  width: 34px;
+  height: 13px;
+}
+.g4-hero-flame {
+  background-image: url(../images/game4/flame.png);
+  width: 100%;
+  height: 100%;
+  animation: exhaust 200ms linear infinite;
+  transform-origin: 100%;
+}
+
+.g4-hero-guitar {
+  background-image: url(../images/game4/guitar.png);
+  left: 4px;
+  top: 13px;
+  width: 82px;
+  height: 32px;
+}
+.g4-hero-cap {
+  background-image: url(../images/game4/cap.png);
+  left: 33px;
+  top: 0px;
+  width: 38px;
+  height: 16px;
+}
+.g4-hero-glasses {
+  left: 51px;
+  top: 6px;
+  width: 25px;
+  height: 12px;
+  background-image: url(../images/game4/glasses.png);
+}
+
+.g4-collision {
+  transition: all 2000ms ease-out, opacity 200ms linear 1800ms;
+  opacity: 0;
+  transform: rotate(180deg);
+}
+
+.g4-prize {
+  position: absolute;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation: floating 1000ms ease-in-out infinite;
+  transition: all 500ms linear;
+}
+
+.g4-prize-on {
+  opacity: 1;
+}
+
+.g4-prize-off {
+  opacity: 0;
+  animation: disappear 300ms ease-out !important;
+}
+
+.g4-prize-glow {
+  position: absolute;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url(../images/game4/circles.png);
+  animation: glow 1000ms ease-out infinite;
+}
+
+.g4-gameBonus {
+  position: absolute;
+
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  font-family: "Forum";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 110%;
+  leading-trim: both;
+  text-edge: cap;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 1);
+}
+
+.g4-negativeBonus {
+  color: rgba(255, 0, 0, 1);
+}

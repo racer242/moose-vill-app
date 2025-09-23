@@ -1,0 +1,229 @@
+.gamePage {
+  position: absolute;
+  display: block;
+  left: 0%;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+}
+
+.gameScene {
+  position: absolute;
+  display: block;
+  left: 0%;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+
+  -webkit-touch-callout: none !important;
+  touch-action: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  caret-color: transparent;
+}
+
+.g1 .gameScene {
+  background-color: #d9bed2;
+}
+
+.g2 .gameScene {
+  background-color: #1d083f;
+}
+
+.g3 .gameScene {
+  background-color: #2f3138;
+}
+
+.g4 .gameScene {
+  background-color: #7dceed;
+}
+
+.countdown {
+  position: absolute;
+  pointer-events: none;
+
+  width: 72px;
+  height: 72px;
+  left: 24px;
+  top: 24px;
+  display: block;
+  isolation: isolate;
+  box-sizing: border-box;
+}
+
+.mobile .countdown {
+  transform: scale(1.1);
+}
+
+.score {
+  position: absolute;
+  pointer-events: none;
+
+  width: 132px;
+  height: 72px;
+  right: 24px;
+  top: 24px;
+
+  background-color: rgba(255, 255, 255, 0.9);
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  border-radius: 36px;
+  display: block;
+  isolation: isolate;
+  box-sizing: border-box;
+  padding-left: 50px;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.mobile .score {
+  transform: scale(1.1);
+}
+
+.bonus-box {
+  position: absolute;
+  display: block;
+  width: 150px;
+  height: 150px;
+  transition-property: transform opacity left top;
+  pointer-events: none;
+}
+
+.bonus {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 150px;
+  height: 150px;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  transform: translate(-50%, -25%);
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 32px;
+}
+
+.g1 .bonus {
+  background-image: url(../images/game1/bonus.svg);
+  color: #fff;
+}
+.g1 .bonus.negative {
+  color: #ff49b8;
+}
+
+.g1 .score {
+  background-image: url(../images/game1/bonus-display.svg);
+  color: #ea49ff;
+}
+
+.g1 .countdown {
+  color: #8755ea;
+}
+
+.g1 .countdown .progress-bar__background {
+  stroke: #8755ea;
+}
+
+.g1 .countdown .progress-bar__progress {
+  stroke: #fff;
+}
+
+.g2 .bonus {
+  background-image: url(../images/game2/bonus.svg);
+  color: #fff;
+}
+.g2 .bonus.negative {
+  color: #5d279e;
+}
+
+.g2 .score {
+  background-image: url(../images/game2/bonus-display.svg);
+  color: #ff49b8;
+}
+
+.g2 .countdown {
+  color: #fff;
+}
+
+.g2 .countdown .progress-bar__background {
+  stroke: #ffd100;
+}
+
+.g2 .countdown .progress-bar__progress {
+  stroke: #5d279e;
+}
+
+.g3 .bonus {
+  background-image: url(../images/game3/bonus.svg);
+  color: #fff;
+}
+.g3 .bonus.negative {
+  color: #5d279e;
+}
+
+.g3 .score {
+  background-image: url(../images/game3/bonus-display.svg);
+  color: #ff49b8;
+}
+
+.g3 .countdown {
+  color: #fff;
+}
+
+.g3 .countdown .progress-bar__background {
+  stroke: #ffd100;
+}
+
+.g3 .countdown .progress-bar__progress {
+  stroke: #5d279e;
+}
+
+.g4 .bonus {
+  background-image: url(../images/game4/bonus.svg);
+  color: #fff;
+}
+.g4 .bonus.negative {
+  color: #5d279e;
+}
+
+.g4 .score {
+  background-image: url(../images/game4/bonus-display.svg);
+  color: #ff49b8;
+}
+
+.g4 .countdown {
+  color: #fff;
+}
+
+.g4 .countdown .progress-bar__background {
+  stroke: #91deff;
+}
+
+.g4 .countdown .progress-bar__progress {
+  stroke: #5d279e;
+}
+
+.g5 .countdown {
+  color: #fff;
+}
+
+.g5 .countdown .progress-bar__background {
+  stroke: #10cfc9;
+}
+
+.g5 .countdown .progress-bar__progress {
+  stroke: #d00007;
+}

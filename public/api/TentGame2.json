@@ -1,0 +1,166 @@
+{
+  "result": "OK",
+  "data": {
+    "place": 1,
+    "marks": "11",
+    "rating": [
+      {
+        "period": "04.03-09.03",
+        "place": "1",
+        "part": "yes",
+        "partTitle": "да"
+      },
+      {
+        "period": "10.03-16.03",
+        "place": 1,
+        "part": "keep",
+        "partTitle": "продержись в рейтинге"
+      },
+      {
+        "period": "17.03-23.03",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "24.03-30.03",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "31.03-06.04",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "07.04-13.04",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "14.04-20.04",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "21.04-27.04",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "28.04-04.05",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "05.05-11.05",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "12.05-18.05",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "19.05-25.05",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "26.05-01.06",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "02.06-08.06",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "09.06-15.06",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "16.06-22.06",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "23.06-29.06",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "30.06-06.07",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "07.07-13.07",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "14.07-20.07",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "21.07-27.07",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "28.07-03.08",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "04.08-10.08",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "11.08-17.08",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "18.08-24.08",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      },
+      {
+        "period": "25.08-30.08",
+        "place": null,
+        "part": null,
+        "partTitle": null
+      }
+    ]
+  },
+  "JWT": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIyMzU2MyIsInN0YXR1cyI6IlBBUlRJQ0lQQU5UIiwicGVyc29uYWwiOnsiZmlyc3ROYW1lIjoiXHUwNDEwXHUwNDMwXHUwNDMwIiwibGFzdE5hbWUiOiJcdTA0MTBcdTA0MzBcdTA0MzBcdTA0MzAiLCJwaG9uZSI6Ijc5MTk3MjMyNzI0IiwiZW1haWwiOiJjb2xhdGVzdEBtYWdlZGlnaXRhbC5ydSJ9LCJleHAiOjE3NDE3MjMxNTJ9.q_65p-uSyr3Lhs9VbDXzceOZ63mOStELdWHbBBWD1LA"
+}

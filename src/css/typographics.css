@@ -1,0 +1,143 @@
+.game h1 {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 24px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.game h2 {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.game .scores-info-plate h2 {
+  font-size: 30px;
+  line-height: 28px;
+  font-weight: 500;
+}
+
+.game h3 {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.game .scores-info-plate h3 {
+  font-size: 20px;
+  padding: 16px;
+}
+
+.game .mobile .scores-info-plate h3 {
+  padding: 6px;
+}
+.game p {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.game p.small {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.game .button {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.game .mobile .button {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.game .mobile h1 {
+  font-size: 28px;
+  line-height: 28px;
+}
+
+.game .mobile h2 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.game .mobile h3 {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.game .mobile p {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.game .mobile p.small {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.game .scoresPage .button {
+  padding: 20px 36px;
+}
+
+.game .display {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 34px;
+}
+
+.game .score-value {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 40px;
+}
+
+.game .score-title {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.game .table {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.game .bold {
+  font-weight: 800;
+}

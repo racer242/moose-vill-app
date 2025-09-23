@@ -1,0 +1,45 @@
+$d: 4px;
+$s: 500px;
+
+.particle-container {
+  position: absolute;
+  display: block;
+}
+
+.particle {
+  position: absolute;
+  width: $d;
+  height: $d;
+  animation: shoot 3s ease-out;
+  animation-name: shoot, fade;
+  border-radius: $d;
+
+  @for $i from 0 to 50 {
+    $t: (1 + 0.01 * random(100)) * 1s;
+
+    &:nth-child(#{$i + 1}) {
+      transform: translate(random($s) * 1px - $s/2, random($s) * 1px - $s/2);
+      background: hsl(random(360), 100%, 65%);
+      animation-duration: $t;
+      animation-delay: 0.001 * random(100) * $t;
+      animation-fill-mode: both;
+    }
+  }
+}
+
+@keyframes shoot {
+  0% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

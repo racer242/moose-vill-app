@@ -1,0 +1,34 @@
+{
+  "result": "OK",
+  "data": {
+    "attemptsLeft": 37,
+    "prizeList": [
+      {
+        "title": "Сертификат на музыкальные события",
+        "thumb": "https://dev.2025-summer.dobrycola-promo.srv08.ru:443/upload/iblock/a22/lt2azyj1gzce7xyi61hynj0rqbdd2dhf.png"
+      },
+      {
+        "title": "Набор стикеров",
+        "thumb": "https://dev.2025-summer.dobrycola-promo.srv08.ru:443/upload/iblock/2a2/kvgdnmxznd02ucak5at8p3zpbassn85f.png"
+      },
+      {
+        "title": "Деньги на телефон",
+        "thumb": "https://dev.2025-summer.dobrycola-promo.srv08.ru:443/upload/iblock/8ae/rtbibrdhct2z0use4vtui9k4z7d2za67.png"
+      },
+      {
+        "title": "Сертификат на музыкальную технику",
+        "thumb": "https://dev.2025-summer.dobrycola-promo.srv08.ru:443/upload/iblock/b8c/r5te36u423dqspa26i59obpt59i36xfg.png"
+      },
+      {
+        "title": "Дополнительный балл",
+        "thumb": "https://dev.2025-summer.dobrycola-promo.srv08.ru/upload/iblock/b7c/377etvbwziclnq5x392qsn5srqbfpm31.png"
+      }
+    ],
+    "prize": {
+      "name": "Сертификат на музыкальную технику",
+      "image": "https://dev.2025-summer.dobrycola-promo.srv08.ru/upload/iblock/b7c/377etvbwziclnq5x392qsn5srqbfpm31.png"
+    }
+  },
+
+  "JWT": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIyMzU2MyIsInN0YXR1cyI6IlBBUlRJQ0lQQU5UIiwicGVyc29uYWwiOnsiZmlyc3ROYW1lIjoiXHUwNDIxXHUwNDM1XHUwNDQwXHUwNDMzXHUwNDM1XHUwNDM5IiwibGFzdE5hbWUiOiJcdTA0MWZcdTA0MzVcdTA0NDJcdTA0NDBcdTA0M2VcdTA0MzIiLCJwaG9uZSI6Ijc5MTk3MjMyNzI0IiwiZW1haWwiOiJjb2xhdGVzdEBtYWdlZGlnaXRhbC5ydSJ9LCJleHAiOjE3NDI2NjE1MjV9.NQtReejywb_ZrAKXsuMESKPL5E6l6HIP40weUlo2XJM"
+}

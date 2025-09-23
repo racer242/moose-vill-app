@@ -1,0 +1,92 @@
+.primary-button,
+.secondary-button {
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 90px;
+  gap: 10px;
+
+  color: #5d279e;
+  background: #ffffff;
+  border: #fff 3px solid;
+  border-radius: 12px;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+  cursor: pointer;
+  box-sizing: border-box;
+
+  background: #ffffff;
+  border-radius: 64px;
+}
+
+.primary-button:hover,
+.primary-button:active {
+  background: #ff49b8;
+  border: #ff49b8 3px solid;
+  color: #fff !important;
+}
+.primary-button:active {
+  background: #ff49b8;
+  border: #ff49b8 3px solid;
+  color: #5d279e !important;
+}
+.primary-button:disabled {
+  color: #ddd !important;
+  border: #eee 3px solid;
+  background: #eee;
+  cursor: default;
+}
+
+.g5 .primary-button {
+  color: #f22830;
+}
+
+.secondary-button {
+  color: #fff;
+  background: none;
+  border: #fff 3px solid;
+}
+
+.secondary-button:hover {
+  background: #fff;
+  color: #ff49b8;
+}
+.secondary-button:active {
+  background: #fff;
+  color: #5d279e;
+}
+
+.secondary-button:disabled {
+  color: #ddd;
+  cursor: default;
+  border: #eee 3px solid;
+}
+
+.primary-button.small,
+.secondary-button.small {
+  padding: 18px 25px !important;
+}
+
+.primary-button.inverted {
+  background: #ff49b8;
+  border: #ff49b8 3px solid;
+  color: #fff !important;
+}
+
+.primary-button:hover,
+.primary-button:active {
+  color: #ff49b8 !important;
+  background: #ffffff;
+  border: #fff 3px solid;
+}
+.primary-button:active {
+  background: #ffffff;
+  border: #fff 3px solid;
+  color: #5d279e !important;
+}

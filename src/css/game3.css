@@ -1,0 +1,171 @@
+.g3-countdown {
+  color: rgba(255, 0, 255, 0.8) !important;
+}
+
+.g3-score {
+  color: rgba(255, 0, 255, 0.8) !important;
+}
+
+.g3-gameScene {
+  position: absolute;
+  display: block;
+}
+.g3-gameSceneBg {
+  position: absolute;
+  display: block;
+  background-image: url(../images/game3/bg.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.mobile .g3-gameSceneBg {
+  background-image: url(../images/game3/bg-game-mobile.png);
+}
+
+.g3-gameCellsBlock {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+}
+
+.mobile .g3-gameCellsBlock {
+  top: 40.5%;
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.g3-cellBox {
+  position: absolute;
+  display: block;
+  border-radius: 10px;
+  border-width: 0;
+  border-style: solid;
+  background-color: #000;
+}
+
+.g3-cellBox:active {
+  margin-top: 6px;
+  height: 94px;
+}
+
+.g3-cellPlate {
+  position: absolute;
+  display: block;
+  width: calc(100% - 4px);
+  height: calc(100% - 12px);
+  margin: 2px;
+  border-radius: 8px;
+  border-width: 0;
+  border-style: solid;
+  pointer-events: none;
+}
+
+.g3-cellBox:active .g3-cellPlate {
+  height: calc(100% - 6px);
+}
+
+.g3-cellBox:hover .g3-cellPlate {
+  background-color: #ffffff !important;
+}
+
+.g3-cell-stop {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.g3-gameObjectBox {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition-property: transform opacity;
+  background-color: rgba(0, 0, 0, 0);
+  pointer-events: none;
+  transition-property: transform opacity left top;
+  transition-timing-function: ease-in;
+}
+
+.g3-gameObject {
+  position: absolute;
+  display: block;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* 
+cellHover:"#fff",
+cellUsed:"#D0D5E0", */
+
+.g3-obj-hide,
+.g3-obj-off {
+  opacity: 0;
+}
+
+.g3-obj-wait-and-hide,
+.g3-obj-show-and-hide,
+.g3-obj-wait-and-found,
+.g3-obj-show-and-found,
+.g3-obj-hidding,
+.g3-obj-show,
+.g3-obj-on {
+  opacity: 1;
+}
+
+.g3-obj-wait-and-found,
+.g3-obj-show-and-found {
+  animation: found 500ms ease-out;
+}
+
+.g3-obj-stop {
+  opacity: 0.2;
+}
+
+.g3-gameBonusBox {
+  position: absolute;
+  display: block;
+  width: 100px;
+  height: 100px;
+  transition-property: transform opacity left top;
+  pointer-events: none;
+}
+
+.g3-gameBonus {
+  position: absolute;
+
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  font-family: "Forum";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 110%;
+  leading-trim: both;
+  text-edge: cap;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 1);
+}
+
+.g3-negativeBonus {
+  color: rgba(255, 0, 0, 1);
+}

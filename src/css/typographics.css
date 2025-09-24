@@ -9,6 +9,11 @@
   margin: 0;
 }
 
+.game .mobile h1 {
+  font-size: 24px;
+  line-height: 24px;
+}
+
 .game h2 {
   font-family: "Geologica";
   font-style: normal;
@@ -18,6 +23,11 @@
   text-align: center;
   padding: 0;
   margin: 0;
+}
+
+.game .mobile h2 {
+  font-size: 24px;
+  line-height: 32px;
 }
 
 .game .scores-info-plate h2 {
@@ -37,13 +47,15 @@
   margin: 0;
 }
 
+.game .mobile h3 {
+  font-size: 20px;
+  line-height: 28px;
+}
+
 .game .scores-info-plate h3 {
   font-size: 20px;
 }
 
-.game .mobile .scores-info-plate h3 {
-  padding: 6px;
-}
 .game p {
   font-family: "Geologica";
   font-style: normal;
@@ -54,9 +66,19 @@
   margin: 0;
 }
 
+.game .mobile p {
+  font-size: 20px;
+  line-height: 28px;
+}
+
 .game p.small {
   font-size: 14px;
   line-height: 18px;
+}
+
+.game .mobile p.small {
+  font-size: 16px;
+  line-height: 20px;
 }
 
 .game .button,
@@ -80,28 +102,8 @@
   line-height: 16px;
 }
 
-.game .mobile h1 {
-  font-size: 28px;
-  line-height: 28px;
-}
-
-.game .mobile h2 {
+.game .mobile .button-large {
   font-size: 24px;
-  line-height: 32px;
-}
-
-.game .mobile h3 {
-  font-size: 20px;
-  line-height: 28px;
-}
-
-.game .mobile p {
-  font-size: 20px;
-  line-height: 28px;
-}
-
-.game .mobile p.small {
-  font-size: 20px;
   line-height: 24px;
 }
 

@@ -18,10 +18,15 @@
   gap: 10px;
 }
 
-.mobile .scoresPage,
-.mobile .finishPage,
 .mobile .mainPage {
-  justify-content: space-evenly;
+  padding: 44px 13px;
+  gap: 60px;
+  justify-content: start;
+}
+
+.mobile .scoresPage {
+  padding: 32px 13px;
+  justify-content: space-between;
 }
 
 .pageOverlay,
@@ -54,7 +59,7 @@
 }
 
 .mobile .mainPage .head {
-  height: 60px;
+  height: 90px;
 }
 
 .mainPage .head h1 {
@@ -129,7 +134,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 28px 36px;
+  padding: 36px 36px;
   gap: 10px;
   background: #5d279e;
   border-radius: 36px;
@@ -154,8 +159,14 @@
   box-sizing: border-box;
 }
 
-.help-item {
-  height: 43px;
+.help-display {
+  width: 100%;
+  height: 42px;
+
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: url(../images/game1/instruction.png);
 }
 
 .score-box {
@@ -221,6 +232,7 @@
 
 .mobile .scores-layout {
   flex-direction: column;
+  gap: 6px;
 }
 
 .scores-values {
@@ -251,7 +263,7 @@
 }
 
 .mobile .scores-info {
-  gap: 10px;
+  gap: 6px;
 }
 
 .with-table {
@@ -288,6 +300,8 @@
 
 .mobile .scores-info-plate {
   width: 100%;
+  padding: 20px 20px;
+  gap: 0px;
 }
 
 .scores-info-comment {
@@ -304,6 +318,7 @@
 
 .mobile .scores-info-comment {
   width: 100%;
+  padding: 20px 20px;
 }
 
 .scores-table {

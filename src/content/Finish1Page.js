@@ -68,7 +68,7 @@ class Finish1Page extends Component {
       <div className={"finishPage common g" + this.state.gameIndex}>
         <div className="pageBg slow-pulsing"></div>
         <div className="head appear-opacity">
-          <h1>Время закончилось!</h1>
+          <h1 className="caps">Время закончилось!</h1>
         </div>
         <div className="score-box">
           <div className="score-plate appear-top">

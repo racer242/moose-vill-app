@@ -45,20 +45,18 @@ class Main1Page extends Component {
           <h1 className="caps">Вайб Лосьвилля</h1>
         </div>
         <div className="plate appear-top delay500ms">
-          <h3>
-            Лови вайб Лосьвилля! Тапай на&nbsp;то, что даёт плюс вайб и набирай
-            очки.
-          </h3>
+          <p>
+            Лови вайб Лосьвилля!
+            <br />
+            Тапай на&nbsp;то, что даёт плюс вайб и набирай очки.
+          </p>
           <p className="orange">
             Нажимай на&nbsp;всё, что создаёт новогодний вайб Лосьвилля и получай
             +1 за&nbsp;каждый предмет. Если нажмешь на&nbsp;то, что его портит,
             очки вычитаются. Время игры — 60&nbsp;секунд.
           </p>
           <div className="help">
-            <img
-              src={require("../images/game1/instruction.png")}
-              className="help-item"
-            ></img>
+            <div className="help-display"></div>
           </div>
         </div>
         <div

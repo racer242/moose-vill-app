@@ -70,38 +70,40 @@ class ScoresPage extends Component {
           }
         >
           <li>{row.period}</li>
-          <li>{row.place ?? "-"}</li>
-          <li>{row.partTitle ?? "-"}</li>
+          <li>{row.place ?? "—"}</li>
+          <li>{row.partTitle ?? "—"}</li>
         </ul>
       );
       if (keep) after = true;
     }
 
     return (
-      <div className="scoresPage common">
-        <div className="pageBg"></div>
+      <div className={"scoresPage common g" + this.state.gameIndex}>
+        <div className="pageBg slow-pulsing"></div>
         <div className="head appear-opacity">
-          <h1>Участие в розыгрышах</h1>
+          <h1 className="caps">Участие в розыгрышах</h1>
         </div>
         <div className="scores-layout">
-          {/* <div className="scores-info with-plate appear-top">
-            <div className="scores-info-plate">
-              <h3>У тебя</h3>
-              <div className="scores-values">
-                <h2 className="yellow">
-                  {marks} {getScoreTitleInGenitive(marks)} и
-                </h2>
-                <h2 className="pink">{place}-е место</h2>
+          {!this.state.userNotAuthorized && !this.state.activityIsOver && (
+            <div className="scores-info with-plate appear-top">
+              <div className="scores-info-plate">
+                <h3>У тебя</h3>
+                <div className="scores-values">
+                  <h2 className="yellow">
+                    {marks} {getScoreTitleInGenitive(marks)} и
+                  </h2>
+                  <h2 className="pink">{place}-е место</h2>
+                </div>
+                <h3>в рейтинге текущей недели</h3>
               </div>
-              <h3>в рейтинге текущей недели</h3>
+              <p className="scores-info-comment small">
+                Чтобы участвовать в розыгрыше, нужно войти в Топ-500 по очкам на
+                неделе, сответствующей розыгрышу.
+              </p>
             </div>
-            <p className="scores-info-comment small">
-              Чтобы участвовать в розыгрыше, нужно войти в Топ-500 по очкам на
-              неделе, сответствующей розыгрышу.
-            </p>
-          </div> */}
+          )}
           <div className="scores-info with-table appear-top delay500ms">
-            <h3>Статусы по неделям</h3>
+            <h3 className="caps">Статусы по неделям</h3>
             <div className="scores-table table">
               <ul className="scores-head white">
                 <li>Розыгрыш</li>

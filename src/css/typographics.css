@@ -1,20 +1,19 @@
 .game h1 {
   font-family: "Geologica";
   font-style: normal;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 24px;
   line-height: 24px;
   text-align: center;
   padding: 0;
   margin: 0;
-  text-transform: uppercase;
 }
 
 .game h2 {
   font-family: "Geologica";
   font-style: normal;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 28px;
   line-height: 32px;
   text-align: center;
   padding: 0;
@@ -30,9 +29,9 @@
 .game h3 {
   font-family: "Geologica";
   font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
   text-align: center;
   padding: 0;
   margin: 0;
@@ -40,7 +39,6 @@
 
 .game .scores-info-plate h3 {
   font-size: 20px;
-  padding: 16px;
 }
 
 .game .mobile .scores-info-plate h3 {
@@ -53,21 +51,21 @@
   font-size: 16px;
   line-height: 20px;
   text-align: center;
-  padding: 0;
   margin: 0;
 }
 
 .game p.small {
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 18px;
 }
 
-.game .button {
+.game .button,
+.game .button-large {
   font-family: "Geologica";
   font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 14px;
   text-align: center;
   text-transform: uppercase;
 }
@@ -75,6 +73,11 @@
 .game .mobile .button {
   font-size: 20px;
   line-height: 28px;
+}
+
+.game .button-large {
+  font-size: 16px;
+  line-height: 16px;
 }
 
 .game .mobile h1 {
@@ -102,10 +105,6 @@
   line-height: 24px;
 }
 
-.game .scoresPage .button {
-  padding: 20px 36px;
-}
-
 .game .display {
   font-family: "Geologica";
   font-style: normal;
@@ -117,17 +116,17 @@
 .game .score-value {
   font-family: "Geologica";
   font-style: normal;
-  font-weight: 600;
-  font-size: 40px;
-  line-height: 40px;
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 48px;
 }
 
 .game .score-title {
   font-family: "Geologica";
   font-style: normal;
   font-weight: 600;
-  font-size: 24px;
-  line-height: 24px;
+  font-size: 20px;
+  line-height: 20px;
 }
 
 .game .table {
@@ -139,5 +138,18 @@
 }
 
 .game .bold {
-  font-weight: 800;
+  font-weight: 800 !important;
+}
+
+.game .caps {
+  text-transform: uppercase;
+}
+
+.game li {
+  list-style: none;
+  text-transform: uppercase;
+  font-family: "Geologica";
+  font-style: normal;
+  font-size: 14px;
+  line-height: 18px;
 }

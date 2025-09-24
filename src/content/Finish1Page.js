@@ -65,8 +65,8 @@ class Finish1Page extends Component {
     let children = [];
     children.push(this.props.children);
     return (
-      <div className="finishPage common">
-        <div className="pageBg"></div>
+      <div className={"finishPage common g" + this.state.gameIndex}>
+        <div className="pageBg slow-pulsing"></div>
         <div className="head appear-opacity">
           <h1>Время закончилось!</h1>
         </div>
@@ -75,7 +75,7 @@ class Finish1Page extends Component {
             <h2>
               Супер!
               <br />
-              Ты успел набрать:
+              <span className="yellow">Ты успел набрать:</span>
             </h2>
             <div className="score-pie appear-zoom delay500ms">
               <div className="score-value">{this.state.gameScore} </div>
@@ -85,37 +85,41 @@ class Finish1Page extends Component {
             </div>
           </div>
         </div>
-        <div className="button-group appear-bottom">
-          {!this.state.userNotAuthorized && (
-            <div
-              className="secondary-button button appear-bottom"
-              onClick={this.scoresButton_clickHandler}
-            >
-              Смотреть рейтинг
-            </div>
-          )}
-          <div
-            className="primary-button button"
-            onClick={this.startButton_clickHandler}
-          >
-            Играть заново
-          </div>
-        </div>
-
-        {/* {this.state.userNotAuthorized && (
+        {this.state.userNotAuthorized && !this.state.activityIsOver && (
           <>
             <div className="signUpInfo appear-opacity">
               Регистрируйся в Акции, попадай в ТОП-500 игроков и участвуй в
               розыгрыше призов:
             </div>
-            <div
-              className="secondary-button button appear-bottom"
-              onClick={this.signUpWarning_clickHandler}
-            >
-              Регистрация
-            </div>
           </>
-        )} */}
+        )}
+        <div className="button-group">
+          <div
+            className="secondary-button button button-mobile-adaptive appear-bottom delay300ms"
+            onClick={this.startButton_clickHandler}
+          >
+            Играть ещё...
+          </div>
+          {(!this.state.userNotAuthorized || this.state.activityIsOver) && (
+            <div
+              className="primary-button button appear-bottom"
+              onClick={this.scoresButton_clickHandler}
+            >
+              Смотреть рейтинг
+            </div>
+          )}
+
+          {this.state.userNotAuthorized && !this.state.activityIsOver && (
+            <>
+              <div
+                className="primary-button button appear-bottom"
+                onClick={this.signUpWarning_clickHandler}
+              >
+                Регистрация
+              </div>
+            </>
+          )}
+        </div>
       </div>
     );
   }

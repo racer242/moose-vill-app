@@ -42,7 +42,7 @@ class Main1Page extends Component {
           <div className="logo-snow-left"></div>
           <div className="logo-snow-right"></div>
           <div className="logo floating"></div>
-          <h1>Вайб Лосьвилля</h1>
+          <h1 className="caps">Вайб Лосьвилля</h1>
         </div>
         <div className="plate appear-top delay500ms">
           <h3>
@@ -62,13 +62,13 @@ class Main1Page extends Component {
           </div>
         </div>
         <div
-          className="primary-button button appear-bottom delay1s"
+          className="primary-button button-large appear-bottom delay1s"
           onClick={this.startButton_clickHandler}
         >
           Играть
         </div>
 
-        {this.state.userNotAuthorized && (
+        {this.state.userNotAuthorized && !this.state.activityIsOver && (
           <div
             className="signUpWarning appear-zoom"
             onClick={this.signUpWarning_clickHandler}

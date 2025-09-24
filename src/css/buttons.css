@@ -6,51 +6,71 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 24px 90px;
+  padding: 20px 24px;
   gap: 10px;
 
-  color: #5d279e;
   background: #ffffff;
-  border: #fff 3px solid;
-  border-radius: 12px;
+  color: #5d279e;
+  border-radius: 64px;
+  /* border: 3px solid transparent; */
+  /* background: linear-gradient(to bottom, #ffffff, #ff4ec7); */
 
   flex: none;
   order: 0;
   flex-grow: 0;
 
+  overflow: hidden;
+
   cursor: pointer;
   box-sizing: border-box;
+  background-clip: padding-box;
+}
 
-  background: #ffffff;
+.primary-button::before,
+.secondary-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background: linear-gradient(to bottom, #ffffff, #c44eff);
   border-radius: 64px;
+
+  padding: 3px;
+
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+}
+
+.secondary-button::before {
+  background: linear-gradient(to bottom, #ffffff, #ff4ec7);
+}
+
+.primary-button:hover::before,
+.secondary-button:hover::before {
+  background: #ff4ec7;
 }
 
 .primary-button:hover,
 .primary-button:active {
-  background: #ff49b8;
-  border: #ff49b8 3px solid;
-  color: #fff !important;
+  color: #ff4ec7;
 }
 .primary-button:active {
-  background: #ff49b8;
-  border: #ff49b8 3px solid;
+  background: #ff4ec7;
   color: #5d279e !important;
 }
 .primary-button:disabled {
   color: #ddd !important;
-  border: #eee 3px solid;
   background: #eee;
   cursor: default;
-}
-
-.g5 .primary-button {
-  color: #f22830;
 }
 
 .secondary-button {
   color: #fff;
   background: none;
-  border: #fff 3px solid;
 }
 
 .secondary-button:hover {
@@ -65,7 +85,6 @@
 .secondary-button:disabled {
   color: #ddd;
   cursor: default;
-  border: #eee 3px solid;
 }
 
 .primary-button.small,
@@ -75,18 +94,34 @@
 
 .primary-button.inverted {
   background: #ff49b8;
-  border: #ff49b8 3px solid;
   color: #fff !important;
 }
 
-.primary-button:hover,
-.primary-button:active {
-  color: #ff49b8 !important;
-  background: #ffffff;
-  border: #fff 3px solid;
+.button-large {
+  padding: 24px 90px;
 }
-.primary-button:active {
-  background: #ffffff;
-  border: #fff 3px solid;
-  color: #5d279e !important;
+
+.button-mobile-adaptive {
+}
+
+.mobile .button-mobile-adaptive {
+  width: 100%;
+}
+
+.button-group {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.mobile .button-group {
+  width: auto;
+  flex-direction: column;
+  flex-direction: column-reverse;
 }

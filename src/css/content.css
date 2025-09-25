@@ -82,6 +82,7 @@
   background-size: contain;
   background-position: center bottom;
   background-repeat: no-repeat;
+  background-image: url(../images/logo-bg.svg);
 }
 
 .logo-bg-pulsing {
@@ -466,7 +467,22 @@
 }
 
 .g2 .pageBg {
-  background-color: #1d083f;
+  background-color: #d9bed2;
+  background-image: url(../images/game2/bg.jpg);
+  background-size: cover;
+}
+
+.mobile .g1 .pageBg {
+  background-image: url(../images/game1/bg-mob.jpg);
+}
+
+.g2.common .pageBg {
+  background-image: url(../images/game2/bg-common.jpg);
+  background-size: cover;
+}
+
+.mobile .g2.common .pageBg {
+  background-image: url(../images/game2/bg-common-mob.jpg);
 }
 
 .g3 .pageBg {
@@ -492,12 +508,10 @@
   background-image: url(../images/game1/logo.png);
 }
 
-.g1 .logo-bg {
-  background-image: url(../images/game1/logo-bg.svg);
-}
-
 .g2 .logo {
+  height: 140px;
   background-image: url(../images/game2/logo.png);
+  background-position: 0px 0px;
 }
 
 .g3 .logo {
@@ -543,24 +557,6 @@
 .mobile .hint-left {
   width: 155px;
   height: 155px;
-}
-
-.hint-logo {
-  width: 36px;
-  height: 36px;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url(../images/game5/five.svg);
-}
-
-.hint-item {
-  width: 66px;
-  height: 26px;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url(../images/game5/hint.svg);
 }
 
 .mainPage .signUpWarning {

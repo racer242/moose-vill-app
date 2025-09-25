@@ -53,7 +53,7 @@ class Main1Page extends Component {
           <p className="orange">
             Нажимай на&nbsp;всё, что создаёт новогодний вайб Лосьвилля и получай
             +1 за&nbsp;каждый предмет. Если нажмешь на&nbsp;то, что его портит,
-            очки вычитаются. Время игры — 60&nbsp;секунд.
+            очки вычитаются. Время игры — 60&nbsp;секунд.
           </p>
           <div className="help">
             <div className="help-display"></div>

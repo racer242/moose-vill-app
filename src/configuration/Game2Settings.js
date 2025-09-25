@@ -1,144 +1,122 @@
 import { isMobile, isLocal } from "../core/helpers";
 
 const Game2Settings = {
+  sceneBounds: {
+    width: 960,
+    height: 806,
+  },
   objectBounds: {
-    width: 100,
-    height: 100,
+    width: 186,
+    height: 271,
   },
-  bonusBounds: {
-    width: 100,
-    height: 100,
-  },
+  objectClipArea: 100,
   objSources: [
     {
-      x: 282,
-      y: 229,
-      width: 47,
-      height: 72,
-      type: {
-        src: require("../images/game2/objects/o1.png"),
-        bonus: 1,
-        speed: 0.5,
-      },
+      x: 349,
+      y: 206,
+      src: require("../images/game2/objects/o5.png"),
+      clip: 112,
+      clipZone: 1,
+      order: 1,
     },
     {
-      x: 451,
-      y: 365,
-      width: 63,
-      height: 80,
-      type: {
-        src: require("../images/game2/objects/o2.png"),
-        bonus: 1,
-        speed: 0.5,
-      },
-    },
-    {
-      x: 453,
-      y: 159,
-      width: 69,
-      height: 108,
-      type: {
-        src: require("../images/game2/objects/o3.png"),
-        bonus: 1,
-        speed: 0.5,
-      },
-    },
-    {
-      x: 369,
-      y: 57,
-      width: 48,
-      height: 62,
-      type: {
-        src: require("../images/game2/objects/o4.png"),
-        bonus: 1,
-        speed: 0.5,
-      },
+      x: 487,
+      y: 212,
+      src: require("../images/game2/objects/o6.png"),
+      clip: 125,
+      clipZone: 1,
+      order: 1,
     },
     {
       x: 596,
-      y: 200,
-      width: 63,
-      height: 95,
-      type: {
-        src: require("../images/game2/objects/o5.png"),
-        bonus: 1,
-        speed: 0.5,
-      },
+      y: 275,
+      src: require("../images/game2/objects/o7.png"),
+      clip: 125,
+      clipZone: 1,
+      order: 4,
     },
     {
-      x: 384,
-      y: 294,
-      width: 56,
-      height: 56,
-      type: {
-        src: require("../images/game2/objects/o6.png"),
-        bonus: 1,
-        speed: 0.5,
-      },
+      x: 442,
+      y: 293,
+      src: require("../images/game2/objects/o3.png"),
+      clip: 110,
+      clipZone: 1,
+      order: 6,
     },
     {
-      x: 567,
-      y: 393,
-      width: 64,
-      height: 53,
-      type: {
-        src: require("../images/game2/objects/o7.png"),
-        bonus: 1,
-        speed: 0.5,
-      },
+      x: 184,
+      y: 312,
+      src: require("../images/game2/objects/o4.png"),
+      clip: 112,
+      clipZone: 1,
+      order: 8,
     },
     {
-      x: 288,
-      y: 368,
-      width: 76,
-      height: 76,
-      type: {
-        src: require("../images/game2/objects/o8.png"),
-        bonus: 1,
-        speed: 0.5,
-      },
+      x: 588,
+      y: 403,
+      src: require("../images/game2/objects/o2.png"),
+      clip: 137,
+      clipZone: 1,
+      order: 10,
     },
     {
-      x: 640,
-      y: 347,
-      width: 27,
-      height: 87,
-      type: {
-        src: require("../images/game2/objects/o9.png"),
-        bonus: 1,
-        speed: 0.5,
-      },
-    },
-    {
-      x: 544,
-      y: 90,
-      width: 37,
-      height: 84,
-      type: {
-        src: require("../images/game2/objects/o10.png"),
-        bonus: 1,
-        speed: 0.5,
-      },
+      x: 326,
+      y: 535,
+      src: require("../images/game2/objects/o1.png"),
+      clip: 167,
+      clipZone: 2,
+      order: 12,
     },
   ],
-  decorSources: [
+  thingSources: [
     {
-      x: 380,
-      y: 368,
-      width: 81,
-      height: 71,
-      type: {
-        src: require("../images/game2/drummer.png"),
-      },
+      x: 342,
+      y: 238,
+      width: 317,
+      height: 117,
+      src: require("../images/game2/objects/t5.png"),
+      order: 2,
     },
     {
-      x: 531,
-      y: 370,
-      width: 48,
-      height: 60,
-      type: {
-        src: require("../images/game2/guitarist.png"),
-      },
+      x: 573,
+      y: 359,
+      width: 174,
+      height: 64,
+      src: require("../images/game2/objects/t6.png"),
+      order: 5,
+    },
+    {
+      x: 357,
+      y: 313,
+      width: 259,
+      height: 176,
+      src: require("../images/game2/objects/t3.png"),
+      order: 7,
+    },
+    {
+      x: 207,
+      y: 348,
+      width: 139,
+      height: 108,
+      src: require("../images/game2/objects/t4.png"),
+      order: 9,
+    },
+
+    {
+      x: 505,
+      y: 456,
+      width: 250,
+      height: 126,
+      src: require("../images/game2/objects/t2.png"),
+      order: 11,
+    },
+    {
+      x: 173,
+      y: 483,
+      width: 381,
+      height: 274,
+      src: require("../images/game2/objects/t1.png"),
+      order: 13,
     },
   ],
   lifeCount: 7,
@@ -147,16 +125,16 @@ const Game2Settings = {
   killingCount: 8,
   switchCount: 1,
 
-  lightSize: 100,
+  showballSize: 50,
 
   bonusLife: 10,
   transitionDuration: 100, //ms
 
   stepDuration: 50, //ms
-  gameDuration: 60, //s
+  gameDuration: 600, //s
   stopDuration: 2000, //ms
 
-  mobileScale: 1.2,
+  mobileScale: 1.2 * 0.889,
 };
 
 export default Game2Settings;

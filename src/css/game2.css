@@ -4,6 +4,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
+  pointer-events: none;
 }
 
 .g2-gameObjectBox {
@@ -16,6 +17,7 @@
   transition-property: transform opacity left top;
   transition-timing-function: ease-in;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .g2-gameObject {
@@ -23,7 +25,13 @@
   display: block;
   background-position: 0px 0px;
   background-repeat: no-repeat;
-  pointer-events: none;
+}
+
+.g2-gameObject:hover,
+.g2-is-over {
+  filter: drop-shadow(0px 0px 1px rgba(255, 255, 255, 1))
+    drop-shadow(0px 0px 3px rgba(255, 239, 189, 0.5))
+    drop-shadow(0px 0px 6px rgba(255, 239, 189, 0.5));
 }
 
 .g2-gameScene {
@@ -46,27 +54,25 @@
   z-index: 20;
 }
 
-.g3-obj-hide,
 .g2-obj-off {
-  opacity: 0;
+  pointer-events: none;
 }
 
-.g3-obj-show,
 .g2-obj-on {
-  opacity: 1;
+  pointer-events: all;
 }
 
 .g2-obj-killing {
-  opacity: 0;
-  animation: blinking 500ms;
-  animation-iteration-count: 2;
+  pointer-events: none;
+  /* animation: blinking 500ms;
+  animation-iteration-count: 2; */
 }
 .g2-obj-kill {
-  opacity: 0;
+  pointer-events: none;
 }
 
 .g2-obj-stop {
-  opacity: 0.2;
+  pointer-events: none;
 }
 
 .g2-gameBonusBox {

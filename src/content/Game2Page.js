@@ -9,8 +9,9 @@ class Game2Page extends GamePage {
 
     let objects = [];
     for (let i = 0; i < this.state.game2.objSources.length; i++) {
+      let obj = this.state.game2.objSources[i];
       objects.push({
-        ...this.state.game2.objSources[i],
+        ...obj,
         width: this.state.game2.objectBounds.width,
         height: this.state.game2.objectBounds.height,
         backgroundSize:
@@ -20,8 +21,17 @@ class Game2Page extends GamePage {
           "px",
         id: "obj" + this.counter++,
         status: "obj-off",
+        over: false,
         life: this.state.game2.deadCount,
         objectClipArea: this.state.game2.objectClipArea,
+        positions: obj.positions.map((v, i) => {
+          return {
+            s: { x: v.s.x - obj.x, y: v.s.y - obj.y, r: v.s.r },
+            f: { x: v.f.x - obj.x, y: v.f.y - obj.y, r: v.f.r },
+          };
+        }),
+        position: { x: 0, y: 0, r: 0 },
+        startPosition: { x: 0, y: 0, r: 0 },
       });
     }
 
@@ -48,6 +58,15 @@ class Game2Page extends GamePage {
       nextObject = objects[Math.floor(Math.random() * objects.length)];
     } while (currentObject === nextObject);
     return nextObject;
+  }
+
+  getPosition(positions) {
+    let position = positions[Math.floor(positions.length * Math.random())];
+    let rnd = Math.random();
+    let x = position.s.x + rnd * (position.f.x - position.s.x);
+    let y = position.s.y + rnd * (position.f.y - position.s.y);
+    let r = position.s.r + rnd * (position.f.r - position.s.r);
+    return { x, y, r };
   }
 
   doStart() {
@@ -88,7 +107,7 @@ class Game2Page extends GamePage {
       if (obj.life < 0) {
         obj.status = "obj-on";
         obj.life =
-          Math.random() * this.state.game2.lifeCount +
+          Math.round(Math.random() * this.state.game2.lifeCount) +
           this.state.game2.lifeCount;
       }
     } else if (obj.status == "obj-hide") {
@@ -96,9 +115,8 @@ class Game2Page extends GamePage {
       if (obj.life < 0) {
         obj.status = "obj-off";
         obj.life =
-          Math.random() * this.state.game2.deadCount +
+          Math.round(Math.random() * this.state.game2.deadCount) +
           this.state.game2.deadCount;
-
         obj = this.getNextObject();
       }
     } else if (obj.status == "obj-off") {
@@ -106,19 +124,21 @@ class Game2Page extends GamePage {
       if (obj.life < 0) {
         obj.status = "obj-show";
         obj.life = this.state.game2.switchCount;
+        obj.position = this.getPosition(obj.positions);
       }
     } else if (obj.status == "obj-on") {
       obj.life--;
       if (obj.life < 0) {
         obj.status = "obj-hide";
         obj.life = this.state.game2.switchCount;
+        obj.position = obj.startPosition;
       }
     } else if (obj.status == "obj-kill") {
       obj.life--;
       if (obj.life < 0) {
         obj.status = "obj-off";
         obj.life =
-          Math.random() * this.state.game2.deadCount +
+          Math.round(Math.random() * this.state.game2.deadCount) +
           this.state.game2.deadCount;
       }
       obj = this.getNextObject();
@@ -127,7 +147,7 @@ class Game2Page extends GamePage {
       if (obj.life < 0) {
         obj.status = "obj-kill";
         obj.life =
-          Math.random() * this.state.game2.killCount +
+          Math.round(Math.random() * this.state.game2.killCount) +
           this.state.game2.killCount;
       }
     }
@@ -159,11 +179,29 @@ class Game2Page extends GamePage {
     this.showballContainer.style.left = lx + "px";
     this.showballContainer.style.top = ly + "px";
 
-    let changed = false;
     let objects = this.state.objects;
-    let bonuses = this.state.bonuses;
-    let score = 0;
+    let objs = this.state.objects.map((v) => (v.over = false));
 
+    objs = objs.filter(
+      (v) => v.x < x && v.x + v.width > x && v.y < y && v.y + v.height > y
+    );
+
+    let obj = objs.length > 0 ? objs[0] : null;
+    if (obj) {
+      if (obj.status == "obj-on" || obj.status == "obj-hide") {
+        obj.over = true;
+
+        this.setState({
+          ...this.state,
+          objects,
+        });
+      }
+    }
+
+    // let changed = false;
+    // let objects = this.state.objects;
+    // let bonuses = this.state.bonuses;
+    // let score = 0;
     // let objs = this.state.objects.filter(
     //   (v) => v.x < x && v.x + v.width > x && v.y < y && v.y + v.height > y
     // );
@@ -203,11 +241,10 @@ class Game2Page extends GamePage {
       objs.push(
         <div
           className={
-            "g2-gameObjectBox "
-            // +
-            // "g2-" +
-            // obj.status +
-            // (this.state.finished ? " g2-obj-stop" : "")
+            "g2-gameObjectBox " +
+            "g2-" +
+            obj.status +
+            (this.state.finished ? " g2-obj-stop" : "")
           }
           id={obj.id}
           key={obj.id}
@@ -216,22 +253,28 @@ class Game2Page extends GamePage {
             top: obj.y - obj.objectClipArea * obj.clipZone,
             width: obj.width + obj.objectClipArea * 2 * obj.clipZone,
             height: obj.objectClipArea * obj.clipZone + obj.clip,
-            transitionDuration: this.state.game2.transitionDuration + "ms",
-            transitionDelay:
-              Math.random() * this.state.game2.transitionDuration + "ms",
             zIndex: obj.order,
           }}
           onClick={this.objButton_clickHandler}
         >
           <div
-            className={"g2-gameObject"}
+            className={"g2-gameObject" + (obj.over ? " g2-is-over" : "")}
             style={{
               left: obj.objectClipArea * obj.clipZone,
               top: obj.objectClipArea * obj.clipZone,
+              transform:
+                "translate(" +
+                obj.position.x +
+                "px," +
+                obj.position.y +
+                "px) rotate(" +
+                obj.position.r +
+                "deg)",
               width: obj.width,
               height: obj.height,
               backgroundImage: `url(${obj.src})`,
               backgroundSize: obj.backgroundSize,
+              transitionDuration: this.state.game2.transitionDuration + "ms",
             }}
           ></div>
         </div>

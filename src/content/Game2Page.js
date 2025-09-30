@@ -260,26 +260,67 @@ class Game2Page extends GamePage {
     let x = (event.clientX - b.x) / this.props.bounds.pageScale;
     let y = (event.clientY - b.y) / this.props.bounds.pageScale;
 
+    if (this.props.bounds.mobileSize) {
+      x /= this.state.game2.mobileScale;
+      y /= this.state.game2.mobileScale;
+    }
+
     x = x - this.state.game2.showballThrowSize / 2;
     y = y - this.state.game2.showballThrowSize / 2;
 
-    let target = { x, y };
+    let target = {
+      ...this.gameState.target,
+      x,
+      y,
+      gx: event.clientX,
+      gy: event.clientY,
+    };
 
-    let targetDelay =
+    let showballFlightDuration =
       this.state.game2.showballSpeed +
       (this.state.desktopBounds.height - y) *
         this.state.game2.showballDistanceFactor;
+
+    let targetIsNearby =
+      showballFlightDuration < this.state.game2.showballShortDuration;
+
+    if (targetIsNearby) {
+      showballFlightDuration =
+        showballFlightDuration * this.state.game2.showballShortDurationFactor;
+    }
+
+    if (showballFlightDuration < this.state.game2.showballMinDuration) {
+      showballFlightDuration = this.state.game2.showballMinDuration;
+    }
+
     this.setGameState({
       target,
-      targetDelay,
+      showballFlightDuration,
+      targetIsNearby,
     });
 
     this.snowballTimer = setTimeout(() => {
-      let target = null;
+      let target = this.gameState.target;
+
+      let objs = this.gameState.objects.filter(
+        (v) =>
+          v.x + v.targetBounds.x < target.x &&
+          v.x + v.targetBounds.x + v.targetBounds.width > target.x &&
+          v.y + v.targetBounds.y < target.y &&
+          v.y + v.targetBounds.y + v.targetBounds.height > target.y
+      );
+
+      let elements = document.elementsFromPoint(target.gx, target.gy);
+      if (elements) {
+        elements = elements.filter((v) => v.id.indexOf("target-area") === 0);
+        console.log("target", elements);
+      }
+
+      target = null;
       this.setGameState({
         target,
       });
-    }, targetDelay);
+    }, showballFlightDuration);
   }
 
   object_downHandler(event) {
@@ -354,6 +395,16 @@ class Game2Page extends GamePage {
               transitionDuration: this.state.game2.transitionDuration + "ms",
             }}
           >
+            <div
+              id={"target-area-" + obj.id}
+              className="g2-gameObject-area"
+              style={{
+                left: obj.targetBounds.x,
+                top: obj.targetBounds.y,
+                width: obj.targetBounds.width,
+                height: obj.targetBounds.height,
+              }}
+            ></div>
             <div
               id={obj.id}
               className="g2-gameObject-shape"
@@ -461,7 +512,10 @@ class Game2Page extends GamePage {
                   top: this.state.target.y,
                   width: this.state.game2.showballThrowSize,
                   height: this.state.game2.showballThrowSize,
-                  animationDuration: this.state.targetDelay + "ms",
+                  animationDuration: this.state.showballFlightDuration + "ms",
+                  animationName: this.state.targetIsNearby
+                    ? "throwSnowballNearby"
+                    : "throwSnowball",
                 }}
               ></div>
             )}
@@ -469,6 +523,7 @@ class Game2Page extends GamePage {
               className="g2-snowball"
               ref={this.refSnowball}
               style={{
+                visibility: this.state.target ? "hidden" : "visible",
                 width: this.state.game2.showballSize,
                 height: this.state.game2.showballSize,
               }}

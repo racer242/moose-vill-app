@@ -14,6 +14,12 @@ const Game2Settings = {
     {
       x: 370,
       y: 206,
+      shape: {
+        x: 45,
+        y: 80,
+        width: 87,
+        height: 110,
+      },
       src: require("../images/game2/objects/o5.png"),
       clip: 112,
       clipZone: 1,
@@ -32,6 +38,12 @@ const Game2Settings = {
     {
       x: 460,
       y: 212,
+      shape: {
+        x: 66,
+        y: 83,
+        width: 54,
+        height: 105,
+      },
       src: require("../images/game2/objects/o6.png"),
       clip: 125,
       clipZone: 1,
@@ -50,6 +62,12 @@ const Game2Settings = {
     {
       x: 596,
       y: 275,
+      shape: {
+        x: 58,
+        y: 81,
+        width: 70,
+        height: 89,
+      },
       src: require("../images/game2/objects/o7.png"),
       clip: 125,
       clipZone: 1,
@@ -68,6 +86,12 @@ const Game2Settings = {
     {
       x: 442,
       y: 293,
+      shape: {
+        x: 56,
+        y: 65,
+        width: 75,
+        height: 141,
+      },
       src: require("../images/game2/objects/o3.png"),
       clip: 110,
       clipZone: 1,
@@ -86,6 +110,12 @@ const Game2Settings = {
     {
       x: 184,
       y: 312,
+      shape: {
+        x: 42,
+        y: 48,
+        width: 102,
+        height: 175,
+      },
       src: require("../images/game2/objects/o4.png"),
       clip: 112,
       clipZone: 1,
@@ -105,6 +135,12 @@ const Game2Settings = {
     {
       x: 588,
       y: 403,
+      shape: {
+        x: 48,
+        y: 75,
+        width: 89,
+        height: 121,
+      },
       src: require("../images/game2/objects/o2.png"),
       clip: 137,
       clipZone: 1,
@@ -124,6 +160,12 @@ const Game2Settings = {
     {
       x: 326,
       y: 535,
+      shape: {
+        x: 2,
+        y: 5,
+        width: 181,
+        height: 261,
+      },
       src: require("../images/game2/objects/o1.png"),
       clip: 167,
       clipZone: 2.5,
@@ -197,7 +239,10 @@ const Game2Settings = {
   killCount: 1,
   killingCount: 8,
 
+  showballThrowSize: 250,
   showballSize: 50,
+  showballSpeed: 300,
+  showballDistanceFactor: 1.5,
 
   bonusLife: 10,
   transitionDuration: 500, //ms

@@ -22,6 +22,7 @@ class Game2Page extends GamePage {
         id: "obj" + this.counter++,
         status: "obj-off",
         over: false,
+        target: false,
         life: this.state.game2.deadCount,
         objectClipArea: this.state.game2.objectClipArea,
         positions: obj.positions.map((v, i) => {
@@ -32,27 +33,41 @@ class Game2Page extends GamePage {
         }),
         position: { x: 0, y: 0, r: 0 },
         startPosition: { x: 0, y: 0, r: 0 },
+        target: null,
       });
     }
 
-    this.state = {
-      ...this.state,
+    this.gameState = {
       gameDuration: this.state.game2.gameDuration,
       stopDuration: this.state.game2.stopDuration,
       stepDuration: this.state.game2.stepDuration,
       objects,
       bonuses: [],
     };
-    this.state.currentObject = this.getNextObject();
+
+    this.gameState.currentObject = this.getNextObject();
+
+    this.state = { ...this.state, ...this.gameState };
 
     this.refSnowball = React.createRef();
 
     this.scene_moveHandler = this.scene_moveHandler.bind(this);
+    this.object_downHandler = this.object_downHandler.bind(this);
+    this.scene_downHandler = this.scene_downHandler.bind(this);
+  }
+
+  updateState() {
+    this.setState({ ...this.state, ...this.gameState });
+  }
+
+  setGameState(gameState) {
+    this.gameState = { ...this.gameState, ...gameState };
+    this.updateState();
   }
 
   getNextObject() {
-    let objects = this.state.objects;
-    let currentObject = this.state.currentObject;
+    let objects = this.gameState.objects;
+    let currentObject = this.gameState.currentObject;
     let nextObject;
     do {
       nextObject = objects[Math.floor(Math.random() * objects.length)];
@@ -82,10 +97,10 @@ class Game2Page extends GamePage {
   }
 
   doGame() {
-    let objects = this.state.objects;
-    let bonuses = this.state.bonuses;
-    let obj = this.state.currentObject;
-    let scoreAdded = this.state.scoreAdded;
+    let objects = this.gameState.objects;
+    let bonuses = this.gameState.bonuses;
+    let obj = this.gameState.currentObject;
+    let scoreAdded = this.gameState.scoreAdded;
 
     bonuses = bonuses.filter((v) => v.status != "bonus-destroy");
     for (const bonus of bonuses) {
@@ -132,6 +147,7 @@ class Game2Page extends GamePage {
         obj.status = "obj-hide";
         obj.life = this.state.game2.switchCount;
         obj.position = obj.startPosition;
+        obj.target = false;
       }
     } else if (obj.status == "obj-kill") {
       obj.life--;
@@ -152,8 +168,7 @@ class Game2Page extends GamePage {
       }
     }
 
-    this.setState({
-      ...this.state,
+    this.setGameState({
       objects,
       bonuses,
       currentObject: obj,
@@ -179,24 +194,27 @@ class Game2Page extends GamePage {
     this.showballContainer.style.left = lx + "px";
     this.showballContainer.style.top = ly + "px";
 
-    let objects = this.state.objects;
-    let objs = this.state.objects.map((v) => (v.over = false));
+    // let objects = this.state.objects;
+    // let objs = this.state.objects.map((v) => {
+    //   v.over = false;
+    //   return v;
+    // });
 
-    objs = objs.filter(
-      (v) => v.x < x && v.x + v.width > x && v.y < y && v.y + v.height > y
-    );
+    // objs = objs.filter(
+    //   (v) => v.x < x && v.x + v.width > x && v.y < y && v.y + v.height > y
+    // );
 
-    let obj = objs.length > 0 ? objs[0] : null;
-    if (obj) {
-      if (obj.status == "obj-on" || obj.status == "obj-hide") {
-        obj.over = true;
+    // let obj = objs.length > 0 ? objs[0] : null;
+    // if (obj) {
+    //   if (obj.status == "obj-on" || obj.status == "obj-hide") {
+    //     obj.over = true;
 
-        this.setState({
-          ...this.state,
-          objects,
-        });
-      }
-    }
+    //     this.setState({
+    //       ...this.state,
+    //       objects,
+    //     });
+    //   }
+    // }
 
     // let changed = false;
     // let objects = this.state.objects;
@@ -234,6 +252,59 @@ class Game2Page extends GamePage {
     // }
   }
 
+  scene_downHandler(event) {
+    if (this.state.finished) return;
+    if (this.gameState.target) return;
+
+    let b = event.currentTarget.getBoundingClientRect();
+    let x = (event.clientX - b.x) / this.props.bounds.pageScale;
+    let y = (event.clientY - b.y) / this.props.bounds.pageScale;
+
+    x = x - this.state.game2.showballThrowSize / 2;
+    y = y - this.state.game2.showballThrowSize / 2;
+
+    let target = { x, y };
+
+    let targetDelay =
+      this.state.game2.showballSpeed +
+      (this.state.desktopBounds.height - y) *
+        this.state.game2.showballDistanceFactor;
+    this.setGameState({
+      target,
+      targetDelay,
+    });
+
+    this.snowballTimer = setTimeout(() => {
+      let target = null;
+      this.setGameState({
+        target,
+      });
+    }, targetDelay);
+  }
+
+  object_downHandler(event) {
+    if (this.gameState.finished) return;
+    if (this.gameState.target) return;
+    let b = event.currentTarget.getBoundingClientRect();
+    let x = (event.clientX - b.x) / this.props.bounds.pageScale;
+    let y = (event.clientY - b.y) / this.props.bounds.pageScale;
+
+    x = x - this.state.game2.showballThrowSize / 2;
+    y = y - this.state.game2.showballThrowSize / 2;
+
+    let objects = this.gameState.objects;
+    let objs = objects.filter((v) => v.id === event.target.id);
+    let obj = objs.length > 0 ? objs[0] : null;
+    if (obj) {
+      if (obj.status == "obj-on" || obj.status == "obj-hide") {
+        obj.target = true;
+      }
+      this.setGameState({
+        objects,
+      });
+    }
+  }
+
   render() {
     let objs = [];
     for (let i = 0; i < this.state.objects.length; i++) {
@@ -258,7 +329,13 @@ class Game2Page extends GamePage {
           onClick={this.objButton_clickHandler}
         >
           <div
-            className={"g2-gameObject" + (obj.over ? " g2-is-over" : "")}
+            className={
+              "g2-gameObject" +
+              " g2-" +
+              (obj.target ? "wide-" : "") +
+              "is-blinking" +
+              (obj.over ? " g2-is-over" : "")
+            }
             style={{
               left: obj.objectClipArea * obj.clipZone,
               top: obj.objectClipArea * obj.clipZone,
@@ -276,7 +353,19 @@ class Game2Page extends GamePage {
               backgroundSize: obj.backgroundSize,
               transitionDuration: this.state.game2.transitionDuration + "ms",
             }}
-          ></div>
+          >
+            <div
+              id={obj.id}
+              className="g2-gameObject-shape"
+              style={{
+                left: obj.shape.x,
+                top: obj.shape.y,
+                width: obj.shape.width,
+                height: obj.shape.height,
+              }}
+              onPointerDown={this.object_downHandler}
+            ></div>
+          </div>
         </div>
       );
     }
@@ -356,7 +445,7 @@ class Game2Page extends GamePage {
               width: this.state.game2.sceneBounds.width,
               height: this.state.game2.sceneBounds.height,
             }}
-            onPointerDown={this.scene_moveHandler}
+            onPointerDown={this.scene_downHandler}
             onPointerMove={this.scene_moveHandler}
           >
             <div className="g2-inactiveLayer">
@@ -364,6 +453,18 @@ class Game2Page extends GamePage {
               {objs}
             </div>
 
+            {this.state.target && (
+              <div
+                className="g2-snowball-attack"
+                style={{
+                  left: this.state.target.x,
+                  top: this.state.target.y,
+                  width: this.state.game2.showballThrowSize,
+                  height: this.state.game2.showballThrowSize,
+                  animationDuration: this.state.targetDelay + "ms",
+                }}
+              ></div>
+            )}
             <div
               className="g2-snowball"
               ref={this.refSnowball}

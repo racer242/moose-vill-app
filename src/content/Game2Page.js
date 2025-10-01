@@ -1,12 +1,13 @@
 import React from "react";
 import "../css/game2.css";
+import "../css/snowExplode.scss";
 import GamePage from "./GamePage";
 import CircularProgress from "../components/CircularProgress";
 
 class Game2Page extends GamePage {
   constructor(props) {
     super(props);
-
+    this.counter = 0;
     let objects = [];
     for (let i = 0; i < this.state.game2.objSources.length; i++) {
       let obj = this.state.game2.objSources[i];
@@ -43,6 +44,8 @@ class Game2Page extends GamePage {
       stepDuration: this.state.game2.stepDuration,
       objects,
       bonuses: [],
+      score: 0,
+      scoreAdded: false,
     };
 
     this.gameState.currentObject = this.getNextObject();
@@ -106,13 +109,13 @@ class Game2Page extends GamePage {
     for (const bonus of bonuses) {
       if (bonus.status == "bonus-show") {
         bonus.life--;
+        scoreAdded = false;
         if (bonus.life < 0) {
           bonus.status = "bonus-destroy";
         }
       }
       if (bonus.status == "bonus-on") {
         bonus.status = "bonus-show";
-        scoreAdded = false;
         bonus.life = this.state.game2.bonusLife;
       }
     }
@@ -162,6 +165,8 @@ class Game2Page extends GamePage {
       obj.life--;
       if (obj.life < 0) {
         obj.status = "obj-kill";
+        obj.position = obj.startPosition;
+        obj.target = false;
         obj.life =
           Math.round(Math.random() * this.state.game2.killCount) +
           this.state.game2.killCount;
@@ -193,68 +198,11 @@ class Game2Page extends GamePage {
 
     this.showballContainer.style.left = lx + "px";
     this.showballContainer.style.top = ly + "px";
-
-    // let objects = this.state.objects;
-    // let objs = this.state.objects.map((v) => {
-    //   v.over = false;
-    //   return v;
-    // });
-
-    // objs = objs.filter(
-    //   (v) => v.x < x && v.x + v.width > x && v.y < y && v.y + v.height > y
-    // );
-
-    // let obj = objs.length > 0 ? objs[0] : null;
-    // if (obj) {
-    //   if (obj.status == "obj-on" || obj.status == "obj-hide") {
-    //     obj.over = true;
-
-    //     this.setState({
-    //       ...this.state,
-    //       objects,
-    //     });
-    //   }
-    // }
-
-    // let changed = false;
-    // let objects = this.state.objects;
-    // let bonuses = this.state.bonuses;
-    // let score = 0;
-    // let objs = this.state.objects.filter(
-    //   (v) => v.x < x && v.x + v.width > x && v.y < y && v.y + v.height > y
-    // );
-
-    // let obj = objs.length > 0 ? objs[0] : null;
-    // if (obj) {
-    //   if (obj.status == "obj-on" || obj.status == "obj-hide") {
-    //     obj.status = "obj-killing";
-    //     obj.life = this.state.game2.killingCount;
-    //     changed = true;
-
-    //     let bonusValue = 1;
-    //     score = Math.max(this.state.score + bonusValue, 0);
-    //     bonuses.push({
-    //       id: "bonus" + this.counter++,
-    //       cssX: x + this.state.game2.showballSize / 2 + "px",
-    //       cssY: y - this.state.game2.showballSize / 4 + "px",
-    //       value: bonusValue,
-    //       status: "bonus-on",
-    //     });
-
-    //     this.setState({
-    //       ...this.state,
-    //       objects,
-    //       bonuses,
-    //       score,
-    //       scoreAdded: bonusValue > 0,
-    //     });
-    //   }
-    // }
   }
 
   scene_downHandler(event) {
     if (this.state.finished) return;
-    if (this.gameState.target) return;
+    if (this.gameState.target || this.gameState.hit) return;
 
     let b = event.currentTarget.getBoundingClientRect();
     let x = (event.clientX - b.x) / this.props.bounds.pageScale;
@@ -265,13 +213,15 @@ class Game2Page extends GamePage {
       y /= this.state.game2.mobileScale;
     }
 
-    x = x - this.state.game2.showballThrowSize / 2;
-    y = y - this.state.game2.showballThrowSize / 2;
+    let bx = x - this.state.game2.showballThrowSize / 2;
+    let by = y - this.state.game2.showballThrowSize / 2;
 
     let target = {
       ...this.gameState.target,
       x,
       y,
+      bx,
+      by,
       gx: event.clientX,
       gy: event.clientY,
     };
@@ -299,33 +249,65 @@ class Game2Page extends GamePage {
       targetIsNearby,
     });
 
+    clearTimeout(this.snowballTimer);
+
     this.snowballTimer = setTimeout(() => {
       let target = this.gameState.target;
+      let objects = this.gameState.objects;
+      let bonuses = this.gameState.bonuses;
+      let score = this.gameState.score;
 
-      let objs = this.gameState.objects.filter(
-        (v) =>
-          v.x + v.targetBounds.x < target.x &&
-          v.x + v.targetBounds.x + v.targetBounds.width > target.x &&
-          v.y + v.targetBounds.y < target.y &&
-          v.y + v.targetBounds.y + v.targetBounds.height > target.y
-      );
-
+      let bonusValue = 0;
+      let hit = null;
       let elements = document.elementsFromPoint(target.gx, target.gy);
-      if (elements) {
-        elements = elements.filter((v) => v.id.indexOf("target-area") === 0);
-        console.log("target", elements);
-      }
+      elements = elements.filter((v) => v.id.indexOf("target-area-") === 0);
+      if (elements.length > 0) {
+        hit = {
+          ...target,
+          scale:
+            (y * this.state.game2.showburstDistanceFactor) /
+            this.state.desktopBounds.height,
+        };
 
+        let id = elements[0].id.replace(/^target-area-/, "");
+
+        let obj = objects.filter((v) => v.id === id)[0];
+        obj.status = "obj-killing";
+        obj.life = this.state.game2.killingCount;
+
+        bonusValue = 1;
+        score = Math.max(this.gameState.score + bonusValue, 0);
+
+        bonuses.push({
+          id: "bonus" + this.counter++,
+          cssX: target.x + this.state.game2.bonusBounds.width * 0.6 + "px",
+          cssY: target.y - this.state.game2.bonusBounds.height / 4 + "px",
+          value: bonusValue,
+          status: "bonus-on",
+        });
+      }
       target = null;
+
       this.setGameState({
         target,
+        hit,
+        objects,
+        bonuses,
+        score,
+        scoreAdded: bonusValue > 0,
       });
+
+      this.snowballTimer = setTimeout(() => {
+        this.setGameState({
+          hit: null,
+        });
+      }, this.state.game2.showballExplodeDuration);
     }, showballFlightDuration);
   }
 
   object_downHandler(event) {
     if (this.gameState.finished) return;
-    if (this.gameState.target) return;
+    if (this.gameState.target || this.gameState.hit) return;
     let b = event.currentTarget.getBoundingClientRect();
     let x = (event.clientX - b.x) / this.props.bounds.pageScale;
     let y = (event.clientY - b.y) / this.props.bounds.pageScale;
@@ -374,8 +356,7 @@ class Game2Page extends GamePage {
               "g2-gameObject" +
               " g2-" +
               (obj.target ? "wide-" : "") +
-              "is-blinking" +
-              (obj.over ? " g2-is-over" : "")
+              "is-blinking"
             }
             style={{
               left: obj.objectClipArea * obj.clipZone,
@@ -395,16 +376,19 @@ class Game2Page extends GamePage {
               transitionDuration: this.state.game2.transitionDuration + "ms",
             }}
           >
-            <div
-              id={"target-area-" + obj.id}
-              className="g2-gameObject-area"
-              style={{
-                left: obj.targetBounds.x,
-                top: obj.targetBounds.y,
-                width: obj.targetBounds.width,
-                height: obj.targetBounds.height,
-              }}
-            ></div>
+            {obj.targetBounds.map((v, i) => (
+              <div
+                key={obj.id + "-" + i}
+                id={"target-area-" + obj.id}
+                className="g2-gameObject-area"
+                style={{
+                  left: v.x,
+                  top: v.y,
+                  width: v.width,
+                  height: v.height,
+                }}
+              ></div>
+            ))}
             <div
               id={obj.id}
               className="g2-gameObject-shape"
@@ -478,6 +462,13 @@ class Game2Page extends GamePage {
       );
     }
 
+    let snowParticles = [];
+    if (this.state.hit) {
+      for (let i = 0; i < this.state.particlesCount; i++) {
+        snowParticles.push(<div key={"p" + i} className="snow-explode"></div>);
+      }
+    }
+
     let time = this.state.game2.gameDuration - this.state.countdown;
 
     return (
@@ -504,12 +495,39 @@ class Game2Page extends GamePage {
               {objs}
             </div>
 
+            {this.state.hit && (
+              <>
+                <div
+                  className="snow-explode-container"
+                  style={{
+                    left: this.state.hit.x,
+                    top: this.state.hit.y,
+                  }}
+                >
+                  {snowParticles}
+                </div>
+                <div
+                  className="g2-snowburst"
+                  style={{
+                    left: this.state.hit.x,
+                    top: this.state.hit.y,
+                    transform:
+                      "translate(-50%,-50%) scale(" +
+                      this.state.hit.scale +
+                      ")",
+                  }}
+                >
+                  {snowParticles}
+                </div>
+              </>
+            )}
+
             {this.state.target && (
               <div
                 className="g2-snowball-attack"
                 style={{
-                  left: this.state.target.x,
-                  top: this.state.target.y,
+                  left: this.state.target.bx,
+                  top: this.state.target.by,
                   width: this.state.game2.showballThrowSize,
                   height: this.state.game2.showballThrowSize,
                   animationDuration: this.state.showballFlightDuration + "ms",
@@ -523,7 +541,8 @@ class Game2Page extends GamePage {
               className="g2-snowball"
               ref={this.refSnowball}
               style={{
-                visibility: this.state.target ? "hidden" : "visible",
+                visibility:
+                  this.state.target || this.state.hit ? "hidden" : "visible",
                 width: this.state.game2.showballSize,
                 height: this.state.game2.showballSize,
               }}
@@ -538,7 +557,7 @@ class Game2Page extends GamePage {
         </div>
         <div
           className={
-            "score display" + (this.state.scoreAdded > 0 ? " impulse" : "")
+            "score display" + (this.state.scoreAdded ? " impulse" : "")
           }
         >
           {this.state.score}

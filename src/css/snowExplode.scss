@@ -1,0 +1,45 @@
+$d: 4px;
+$s: 500px;
+
+.snow-explode-container {
+  position: absolute;
+  display: block;
+}
+
+.snow-explode {
+  position: absolute;
+  width: $d;
+  height: $d;
+  animation: snow-shoot 3s ease-out;
+  animation-name: snow-shoot, snow-fade;
+  border-radius: $d;
+
+  @for $i from 0 to 50 {
+    $t: (1 + 0.01 * random(100)) * 500ms;
+
+    &:nth-child(#{$i + 1}) {
+      transform: translate(random($s) * 1px - $s/2, random($s) * 1px - $s/2);
+      background: hsl(random(360), 100%, 100%);
+      animation-duration: $t;
+      animation-delay: 0.001 * random(100) * $t;
+      animation-fill-mode: both;
+    }
+  }
+}
+
+@keyframes snow-shoot {
+  0% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes snow-fade {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

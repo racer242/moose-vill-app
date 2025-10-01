@@ -250,7 +250,7 @@ class Game1Page extends GamePage {
         </div>
         <div
           className={
-            "score display" + (this.state.scoreAdded > 0 ? " impulse" : "")
+            "score display" + (this.state.scoreAdded ? " impulse" : "")
           }
         >
           {this.state.score}

@@ -1,5 +1,5 @@
 $d: 4px;
-$s: 500px;
+$s: 300px;
 
 .snow-explode-container {
   position: absolute;
@@ -10,14 +10,20 @@ $s: 500px;
   position: absolute;
   width: $d;
   height: $d;
-  animation: snow-shoot 3s ease-out;
+  animation: snow-shoot 1s ease-out;
   animation-name: snow-shoot, snow-fade;
   border-radius: $d;
 
   @for $i from 0 to 50 {
-    $t: (1 + 0.01 * random(100)) * 500ms;
+    $t: (1 + 0.01 * random(100)) * 400ms;
+
+    $sizeAdd: random(5) * 1px; // random(11) → 0..10 → итого 10..20px
+    $finalSize: $d + $sizeAdd;
 
     &:nth-child(#{$i + 1}) {
+      width: $finalSize;
+      height: $finalSize;
+      border-radius: $finalSize;
       transform: translate(random($s) * 1px - $s/2, random($s) * 1px - $s/2);
       background: hsl(random(360), 100%, 100%);
       animation-duration: $t;

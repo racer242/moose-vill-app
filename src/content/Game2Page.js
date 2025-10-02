@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/game2.css";
 import "../css/snowExplode.scss";
+import "../css/lights.scss";
 import GamePage from "./GamePage";
 import CircularProgress from "../components/CircularProgress";
 
@@ -57,6 +58,12 @@ class Game2Page extends GamePage {
     this.scene_moveHandler = this.scene_moveHandler.bind(this);
     this.object_downHandler = this.object_downHandler.bind(this);
     this.scene_downHandler = this.scene_downHandler.bind(this);
+  }
+
+  stopGame() {
+    super.stopGame();
+    clearTimeout(this.snowballTimer);
+    clearTimeout(this.snowTimer);
   }
 
   updateState() {
@@ -227,16 +234,19 @@ class Game2Page extends GamePage {
     };
 
     let showballFlightDuration =
-      this.state.game2.showballSpeed +
-      (this.state.desktopBounds.height - y) *
-        this.state.game2.showballDistanceFactor;
+      (Math.pow(this.state.mobileBounds.height - y, 2) *
+        this.state.game2.showballDistanceFactor) /
+      1000;
 
     let targetIsNearby =
-      showballFlightDuration < this.state.game2.showballShortDuration;
+      this.state.mobileBounds.height - y <
+      this.state.game2.showballShortDistance;
 
     if (targetIsNearby) {
       showballFlightDuration =
-        showballFlightDuration * this.state.game2.showballShortDurationFactor;
+        (Math.pow(this.state.mobileBounds.height - y, 2) *
+          this.state.game2.showballShortDurationFactor) /
+        1000;
     }
 
     if (showballFlightDuration < this.state.game2.showballMinDuration) {
@@ -259,6 +269,7 @@ class Game2Page extends GamePage {
 
       let bonusValue = 0;
       let hit = null;
+      let snow = null;
       let elements = document.elementsFromPoint(target.gx, target.gy);
       elements = elements.filter((v) => v.id.indexOf("target-area-") === 0);
       if (elements.length > 0) {
@@ -268,13 +279,15 @@ class Game2Page extends GamePage {
             (y * this.state.game2.showburstDistanceFactor) /
             this.state.desktopBounds.height,
         };
+        snow = {
+          ...target,
+        };
 
         let id = elements[0].id.replace(/^target-area-/, "");
 
         let obj = objects.filter((v) => v.id === id)[0];
         obj.status = "obj-killing";
         obj.life = this.state.game2.killingCount;
-
         bonusValue = 1;
         score = Math.max(this.gameState.score + bonusValue, 0);
 
@@ -291,6 +304,7 @@ class Game2Page extends GamePage {
       this.setGameState({
         target,
         hit,
+        snow,
         objects,
         bonuses,
         score,
@@ -300,6 +314,12 @@ class Game2Page extends GamePage {
       this.snowballTimer = setTimeout(() => {
         this.setGameState({
           hit: null,
+        });
+      }, this.state.game2.showburstDuration);
+
+      this.snowTimer = setTimeout(() => {
+        this.setGameState({
+          snow: null,
         });
       }, this.state.game2.showballExplodeDuration);
     }, showballFlightDuration);
@@ -336,8 +356,7 @@ class Game2Page extends GamePage {
         <div
           className={
             "g2-gameObjectBox " +
-            "g2-" +
-            obj.status +
+            ("g2-" + obj.status) +
             (this.state.finished ? " g2-obj-stop" : "")
           }
           id={obj.id}
@@ -373,7 +392,13 @@ class Game2Page extends GamePage {
               height: obj.height,
               backgroundImage: `url(${obj.src})`,
               backgroundSize: obj.backgroundSize,
-              transitionDuration: this.state.game2.transitionDuration + "ms",
+              transitionDuration:
+                (obj.status == "obj-show"
+                  ? this.state.game2.transitionDuration / 2 +
+                    this.state.game2.transitionDuration * 2 * Math.random()
+                  : obj.status == "obj-kill"
+                  ? this.state.game2.transitionDuration / 2
+                  : this.state.game2.transitionDuration) + "ms",
             }}
           >
             {obj.targetBounds.map((v, i) => (
@@ -431,14 +456,14 @@ class Game2Page extends GamePage {
       let bonus = this.state.bonuses[i];
       let particles = [];
       if (bonus.value > 0) {
-        for (let j = 0; j < this.state.particlesCount; j++) {
-          particles.push(<div key={"p" + j} className="particle"></div>);
+        for (let j = 0; j < this.state.particlesCount / 2; j++) {
+          particles.push(<div key={"p" + j} className="bonus-particle"></div>);
         }
       }
       bonuses.push(
         <div key={bonus.id}>
           <div
-            className="particle-container"
+            className="bonus-particle-container"
             style={{
               left: bonus.cssX,
               top: bonus.cssY,
@@ -454,7 +479,7 @@ class Game2Page extends GamePage {
               top: bonus.cssY,
             }}
           >
-            <div className={"bonus g1" + (bonus.value > 0 ? "" : " negative")}>
+            <div className={"bonus g2" + (bonus.value > 0 ? "" : " negative")}>
               {bonus.value > 0 ? "+" + bonus.value : bonus.value}
             </div>
           </div>
@@ -463,8 +488,8 @@ class Game2Page extends GamePage {
     }
 
     let snowParticles = [];
-    if (this.state.hit) {
-      for (let i = 0; i < this.state.particlesCount; i++) {
+    if (this.state.snow) {
+      for (let i = 0; i < this.state.game2.snowParticlesCount; i++) {
         snowParticles.push(<div key={"p" + i} className="snow-explode"></div>);
       }
     }
@@ -490,36 +515,40 @@ class Game2Page extends GamePage {
             onPointerDown={this.scene_downHandler}
             onPointerMove={this.scene_moveHandler}
           >
+            {Array.from({ length: 12 }, (_, i) => (
+              <div key={"light-item" + i} className={"g2-light-item i" + i}>
+                <div className="light-layer star1"></div>
+                <div className="light-layer star2"></div>
+                <div className="light-layer star3"></div>
+              </div>
+            ))}
+
             <div className="g2-inactiveLayer">
               {things}
               {objs}
             </div>
 
+            {this.state.snow && (
+              <div
+                className="snow-explode-container"
+                style={{
+                  left: this.state.snow.x,
+                  top: this.state.snow.y,
+                }}
+              >
+                {snowParticles}
+              </div>
+            )}
             {this.state.hit && (
-              <>
-                <div
-                  className="snow-explode-container"
-                  style={{
-                    left: this.state.hit.x,
-                    top: this.state.hit.y,
-                  }}
-                >
-                  {snowParticles}
-                </div>
-                <div
-                  className="g2-snowburst"
-                  style={{
-                    left: this.state.hit.x,
-                    top: this.state.hit.y,
-                    transform:
-                      "translate(-50%,-50%) scale(" +
-                      this.state.hit.scale +
-                      ")",
-                  }}
-                >
-                  {snowParticles}
-                </div>
-              </>
+              <div
+                className="g2-snowburst"
+                style={{
+                  left: this.state.hit.x,
+                  top: this.state.hit.y,
+                  transform:
+                    "translate(-50%,-50%) scale(" + this.state.hit.scale + ")",
+                }}
+              ></div>
             )}
 
             {this.state.target && (
@@ -560,6 +589,11 @@ class Game2Page extends GamePage {
             "score display" + (this.state.scoreAdded ? " impulse" : "")
           }
         >
+          <div className="score-decor item-1"></div>
+          <div className="score-decor item-2"></div>
+          <div className="score-decor item-3"></div>
+          <div className="score-decor item-4"></div>
+          <div className="score-decor item-5"></div>
           {this.state.score}
         </div>
         <div

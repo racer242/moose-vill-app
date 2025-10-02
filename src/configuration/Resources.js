@@ -1,5 +1,25 @@
+const common = [
+  require("../images/finish-plate.png"),
+  require("../images/logo-bg.svg"),
+  require("../images/score-pie.png"),
+  require("../images/snow-small.png"),
+  require("../images/snow1.svg"),
+  require("../images/snow10.svg"),
+  require("../images/snow11.svg"),
+  require("../images/snow12.svg"),
+  require("../images/snow2.svg"),
+  require("../images/snow3.svg"),
+  require("../images/snow4.svg"),
+  require("../images/snow5.svg"),
+  require("../images/snow6.svg"),
+  require("../images/snow7.svg"),
+  require("../images/snow8.svg"),
+  require("../images/snow9.svg"),
+];
+
 const resources = {
   1: [
+    ...common,
     require("../images/game1/bg.jpg"),
     require("../images/game1/bg-mob.jpg"),
     require("../images/game1/logo.png"),
@@ -30,6 +50,7 @@ const resources = {
     require("../images/game1/objects/bad/o10.png"),
   ],
   2: [
+    ...common,
     require("../images/game2/bg.jpg"),
     require("../images/game2/bg-mob.jpg"),
     require("../images/game2/logo.png"),
@@ -37,6 +58,7 @@ const resources = {
     require("../images/game2/bg-common-mob.jpg"),
     require("../images/game2/bg-game.jpg"),
     require("../images/game2/snowball.png"),
+    require("../images/game2/snowburst.png"),
     require("../images/game2/objects/o1.png"),
     require("../images/game2/objects/o2.png"),
     require("../images/game2/objects/o3.png"),
@@ -50,8 +72,12 @@ const resources = {
     require("../images/game2/objects/t4.png"),
     require("../images/game2/objects/t5.png"),
     require("../images/game2/objects/t6.png"),
+    require("../images/game2/star1.png"),
+    require("../images/game2/star2.png"),
+    require("../images/game2/star3.png"),
   ],
   3: [
+    ...common,
     require("../images/game3/bg.png"),
     require("../images/game3/ajuster.png"),
     require("../images/game3/bg-mobile.png"),
@@ -82,6 +108,7 @@ const resources = {
     require("../images/game3/objects/o20.png"),
   ],
   4: [
+    ...common,
     require("../images/game4/bottom1.png"),
 
     require("../images/game4/bottom1.png"),

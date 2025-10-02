@@ -83,6 +83,17 @@ class Finish1Page extends Component {
                 {getScoreTitleInGenitive(this.state.gameScore)}
               </div>
             </div>
+            <div className="finish-decor-container appear-zoom delay1s">
+              <div className="finish-decor item-1"></div>
+              <div className="finish-decor item-2"></div>
+              <div className="finish-decor item-3"></div>
+              <div className="finish-decor item-4"></div>
+              <div className="finish-decor item-5"></div>
+              <div className="finish-decor item-6"></div>
+              <div className="finish-decor item-7"></div>
+              <div className="finish-decor item-8"></div>
+              <div className="finish-decor item-9"></div>
+            </div>
           </div>
         </div>
         {this.state.userNotAuthorized && !this.state.activityIsOver && (

@@ -89,8 +89,9 @@
   display: block;
   width: 150px;
   height: 150px;
-  transition-property: transform opacity left top;
+  transition-property: transform, opacity, left, top;
   pointer-events: none;
+  z-index: 30;
 }
 
 .bonus {
@@ -111,7 +112,7 @@
   transform: translate(-50%, -25%);
   font-family: "Geologica";
   font-style: normal;
-  font-weight: 600;
+  font-weight: 800;
   font-size: 32px;
   line-height: 32px;
 }
@@ -125,7 +126,6 @@
 }
 
 .g1 .score {
-  background-image: url(../images/game1/bonus-display.svg);
   color: #ea49ff;
 }
 
@@ -143,15 +143,14 @@
 
 .g2 .bonus {
   background-image: url(../images/game2/bonus.svg);
-  color: #fff;
+  color: #e11f26;
 }
 .g2 .bonus.negative {
   color: #5d279e;
 }
 
 .g2 .score {
-  background-image: url(../images/game2/bonus-display.svg);
-  color: #ff49b8;
+  color: #e11f26;
 }
 
 .g2 .countdown {
@@ -159,11 +158,11 @@
 }
 
 .g2 .countdown .progress-bar__background {
-  stroke: #ffd100;
+  stroke: #fff;
 }
 
 .g2 .countdown .progress-bar__progress {
-  stroke: #5d279e;
+  stroke: #e11f26;
 }
 
 .g3 .bonus {
@@ -226,4 +225,99 @@
 
 .g5 .countdown .progress-bar__progress {
   stroke: #d00007;
+}
+
+.score-decor {
+  position: absolute;
+  animation: pulse 3s ease-in-out infinite;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.score-decor.item-1 {
+  left: 28px;
+  top: 13px;
+  width: 8px;
+  height: 8px;
+  background-image: url(../images/score-decor1.svg);
+}
+.score-decor.item-2 {
+  left: 43px;
+  top: 13px;
+  width: 11px;
+  height: 11px;
+  background-image: url(../images/score-decor2.svg);
+}
+.score-decor.item-3 {
+  left: 56px;
+  top: 49px;
+  width: 8px;
+  height: 9px;
+  background-image: url(../images/score-decor3.svg);
+}
+.score-decor.item-4 {
+  left: 14px;
+  top: 16px;
+  width: 53px;
+  height: 46px;
+  background-image: url(../images/score-decor4.svg);
+  animation: small-pulse 1s ease-in-out infinite;
+}
+.score-decor.item-5 {
+  left: 12px;
+  top: 20px;
+  width: 15px;
+  height: 15px;
+  background-image: url(../images/score-decor5.svg);
+}
+
+/* Индивидуальные настройки для каждого блока */
+.score-decor:nth-child(1) {
+  animation-duration: 2.4s;
+  animation-delay: 0.1s;
+}
+
+.score-decor:nth-child(2) {
+  animation-duration: 3.1s;
+  animation-delay: 0.5s;
+}
+
+.score-decor:nth-child(3) {
+  animation-duration: 2.7s;
+  animation-delay: 0.3s;
+}
+
+.score-decor:nth-child(4) {
+  animation-duration: 3.5s;
+  animation-delay: 0.7s;
+}
+
+.score-decor:nth-child(5) {
+  animation-duration: 2.9s;
+  animation-delay: 0.2s;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(-0px, -1px) rotate(-2deg) scale(1.3);
+  }
+  50% {
+    transform: translate(1px, -1px) rotate(3deg) scale(1.2);
+  }
+  75% {
+    transform: translate(-1px, 0px) rotate(-1.5deg) scale(1.1);
+  }
+}
+@keyframes small-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
 }

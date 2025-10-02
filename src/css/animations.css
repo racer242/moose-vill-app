@@ -59,7 +59,7 @@
 }
 
 .bonusUp {
-  animation: bonusUp 800ms ease-in;
+  animation: bonusUp 1200ms ease-in;
   animation-fill-mode: both;
 }
 @keyframes bonusUp {

@@ -3,7 +3,7 @@
   display: block;
   width: 100px;
   height: 100px;
-  transition-property: transform opacity left top;
+  transition-property: transform, opacity, left, top;
   background-color: rgba(0, 0, 0, 0);
 }
 

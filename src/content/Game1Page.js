@@ -199,13 +199,13 @@ class Game1Page extends GamePage {
       let particles = [];
       if (bonus.value > 0) {
         for (let j = 0; j < this.state.particlesCount; j++) {
-          particles.push(<div key={"p" + j} className="particle"></div>);
+          particles.push(<div key={"p" + j} className="bonus-particle"></div>);
         }
       }
       bonuses.push(
         <div key={bonus.id}>
           <div
-            className="particle-container"
+            className="bonus-particle-container"
             style={{
               left: bonus.cssX,
               top: bonus.cssY,

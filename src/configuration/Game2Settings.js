@@ -387,7 +387,7 @@ const Game2Settings = {
     height: 100,
   },
 
-  lifeCount: 20,
+  lifeCount: 25,
   deadCount: 0,
   switchCount: 0,
   killCount: 0,
@@ -395,19 +395,20 @@ const Game2Settings = {
 
   showballThrowSize: 300,
   showballSize: 50,
-  showballSpeed: 300,
-  showballDistanceFactor: 1.5,
-  showballShortDuration: 720,
-  showballShortDurationFactor: 0.6,
-  showballMinDuration: 200,
-  showballExplodeDuration: 1000,
+  showballDistanceFactor: 2.2,
+  showballShortDistance: 450,
+  showballShortDurationFactor: 1.8,
+  showballMinDuration: 250,
+  showballExplodeDuration: 800,
   showburstDistanceFactor: 1.7,
+  showburstDuration: 500,
+  snowParticlesCount: 30,
 
   bonusLife: 20,
   transitionDuration: 500, //ms
 
   stepDuration: 50, //ms
-  gameDuration: 600, //ms
+  gameDuration: 60, //ms
   stopDuration: 2000, //ms
 
   mobileScale: 1.2 * 0.889,

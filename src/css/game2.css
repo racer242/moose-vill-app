@@ -13,7 +13,7 @@
   width: 100px;
   height: 100px;
   background-color: rgba(0, 0, 0, 0);
-  transition-property: transform left top;
+  transition-property: transform, left, top;
   transition-timing-function: ease-in;
   overflow: hidden;
   pointer-events: none;
@@ -126,6 +126,9 @@
 .snow-explode-container {
   z-index: 19;
 }
+.bonus-particle-container {
+  z-index: 19;
+}
 
 @keyframes throwSnowball {
   0% {
@@ -185,7 +188,7 @@
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 201px 69px;
-  z-index: 18;
+  z-index: 20;
   animation: g2-snowburst 300ms steps(3) forwards;
 }
 
@@ -201,96 +204,52 @@
 .g2-obj-off {
   pointer-events: none;
 }
-
+.g2-obj-show,
+.g2-obj-hide,
 .g2-obj-on {
   pointer-events: all;
 }
 
+.g2-obj-kill,
 .g2-obj-killing {
   pointer-events: none;
-  animation: shake 500ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  animation: kill-shake 500ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
-@keyframes shake {
+@keyframes kill-shake {
   0%,
   100% {
     transform: translate(0, 0) rotate(0deg);
   }
   10% {
-    transform: translate(-5px, -2px) rotate(-2deg);
+    transform: translate(-5px, -2px) rotate(-3deg);
   }
   20% {
-    transform: translate(4px, 1px) rotate(1.5deg);
+    transform: translate(4px, 1px) rotate(2deg);
   }
   30% {
-    transform: translate(-3px, -1px) rotate(-1deg);
+    transform: translate(-3px, -1px) rotate(-2deg);
   }
   40% {
     transform: translate(3px, 2px) rotate(1deg);
   }
   50% {
-    transform: translate(-2px, -2px) rotate(-0.5deg);
+    transform: translate(-2px, -2px) rotate(-1.5deg);
   }
   60% {
-    transform: translate(2px, 1px) rotate(0.8deg);
+    transform: translate(2px, 1px) rotate(1.8deg);
   }
   70% {
-    transform: translate(-1px, -1px) rotate(-0.3deg);
+    transform: translate(-1px, -1px) rotate(-1.3deg);
   }
   80% {
-    transform: translate(1px, 1px) rotate(0.4deg);
+    transform: translate(1px, 1px) rotate(1.4deg);
   }
   90% {
-    transform: translate(-0.5px, -0.5px) rotate(-0.2deg);
+    transform: translate(-0.5px, -0.5px) rotate(-1.2deg);
   }
-}
-
-.g2-obj-kill {
-  pointer-events: none;
 }
 
 .g2-obj-stop {
   pointer-events: none;
-}
-
-.g2-gameBonusBox {
-  position: absolute;
-  display: block;
-  width: 100px;
-  height: 100px;
-  transition-property: transform opacity left top;
-  pointer-events: none;
-}
-
-.g2-gameBonus {
-  position: absolute;
-
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  height: 100%;
-  background-size: contain;
-  background-position: center center;
-  background-repeat: no-repeat;
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-
-  font-family: "Forum";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 32px;
-  line-height: 110%;
-  leading-trim: both;
-  text-edge: cap;
-  text-align: center;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 1);
-}
-
-.g2-negativeBonus {
-  color: rgba(255, 0, 0, 1);
 }

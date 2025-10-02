@@ -253,6 +253,11 @@ class Game1Page extends GamePage {
             "score display" + (this.state.scoreAdded ? " impulse" : "")
           }
         >
+          <div className="score-decor item-1"></div>
+          <div className="score-decor item-2"></div>
+          <div className="score-decor item-3"></div>
+          <div className="score-decor item-4"></div>
+          <div className="score-decor item-5"></div>
           {this.state.score}
         </div>
         <div

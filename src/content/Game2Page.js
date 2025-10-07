@@ -588,6 +588,7 @@ class Game2Page extends GamePage {
                   this.state.target || this.state.hit ? "hidden" : "visible",
                 width: this.state.game2.showballSize,
                 height: this.state.game2.showballSize,
+                display: this.state.isMobile ? "none" : "block",
               }}
             ></div>
             {bonuses}

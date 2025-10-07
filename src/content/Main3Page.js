@@ -35,65 +35,35 @@ class Main3Page extends Component {
     children.push(this.props.children);
 
     return (
-      <div className="g3 mainPage">
-        <div className="pageBg"></div>
-        {!this.props.bounds.mobileSize && (
-          <>
-            <div className="disc-left music-box"></div>
-            <div className="disc-right music-box"></div>
-            <div className="music-button-box">
-              <div className="music-button button-switching"></div>
-              <div className="music-button button-switching delay500ms"></div>
-              <div className="music-button button-switching delay1s"></div>
-            </div>
-            <div className="jack-box">
-              <div className="jack button-switching"></div>
-              <div className="jack button-switching delay500ms"></div>
-              <div className="jack button-switching delay1s"></div>
-            </div>
-            <div className="ajuster-right ajusting"></div>
-            <div className="ajuster-left ajusting delay3s"></div>
-          </>
-        )}
-        {this.props.bounds.mobileSize && (
-          <>
-            <div className="disc-mobile music-box"></div>
-            <div className="handle-box">
-              <div className="handle">
-                <div className="handle handling"></div>
-                <div className="handle-item"></div>
-              </div>
-              <div className="handle">
-                <div className="handle handling delay500ms"></div>
-                <div className="handle-item"></div>
-              </div>
-            </div>
-          </>
-        )}
-
+      <div className="mainPage g3">
+        <div className="pageBg slow-pulsing"></div>
         <div className="head appear-zoom">
+          <div className="logo-bg logo-bg-pulsing"></div>
+          <div className="logo-snow-left"></div>
+          <div className="logo-snow-right"></div>
           <div className="logo floating"></div>
-          <h1>Найди мэтч</h1>
+          <h1 className="caps">Новогодняя ёлка</h1>
         </div>
         <div className="plate appear-top delay500ms">
-          <h3>
-            Потренируй память и готовься к Главным событиям этого лета вместе
-            с Добрый® Кола!
-          </h3>
+          <p>
+            На&nbsp;ярмарке Лосьвилля установили большую новогоднюю ёлку
+            с&nbsp;огоньками, которые нужно зажечь перед&nbsp;праздником.
+          </p>
           <p className="orange">
-            Переворачивай карточки, как в известной игре. У тебя 60 секунд:
-            сколько секунд останется, когда откроешь все пары, столько очков ты
-            получишь за игру.
+            Повтори последовательность огоньков, нажимая на&nbsp;них, чтобы
+            зажечь новогоднюю ёлку Лосьвилля! Приготовься, огоньки начнут
+            загораться после старта, постарайся запомнить и повторить
+            последовательность с&nbsp;1-го раза, чтобы заработать больше очков.
           </p>
         </div>
         <div
-          className="primary-button button appear-bottom delay1s"
+          className="primary-button button-large appear-bottom delay1s"
           onClick={this.startButton_clickHandler}
         >
           Играть
         </div>
 
-        {this.state.userNotAuthorized && (
+        {this.state.userNotAuthorized && !this.state.activityIsOver && (
           <div
             className="signUpWarning appear-zoom"
             onClick={this.signUpWarning_clickHandler}

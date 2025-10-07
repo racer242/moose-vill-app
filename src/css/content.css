@@ -85,6 +85,10 @@
   background-image: url(../images/logo-bg.svg);
 }
 
+.g3 .logo-bg {
+  background-image: url(../images/game3/logo-bg.svg);
+}
+
 .logo-bg-pulsing {
   animation: logo-bg-pulsing 5000ms ease-out infinite;
 }
@@ -487,12 +491,12 @@
 
 .g3 .pageBg {
   background-color: #2f3138;
-  background-image: url(../images/game3/bg.png);
+  background-image: url(../images/game3/bg-common.jpg);
   background-size: cover;
 }
 
 .mobile .g3 .pageBg {
-  background-image: url(../images/game3/bg-mobile.png);
+  background-image: url(../images/game3/bg-common-mob.jpg);
 }
 
 .g4 .pageBg {

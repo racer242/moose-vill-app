@@ -27,15 +27,15 @@
 }
 
 .g1 .gameScene {
-  background-color: #d9bed2;
+  background-color: #fff;
 }
 
 .g2 .gameScene {
-  background-color: #1d083f;
+  background-color: #fff;
 }
 
 .g3 .gameScene {
-  background-color: #2f3138;
+  background-color: #fff;
 }
 
 .g4 .gameScene {
@@ -183,11 +183,11 @@
 }
 
 .g3 .countdown .progress-bar__background {
-  stroke: #ffd100;
+  stroke: #fff;
 }
 
 .g3 .countdown .progress-bar__progress {
-  stroke: #5d279e;
+  stroke: #1e9800;
 }
 
 .g4 .bonus {
@@ -213,18 +213,6 @@
 
 .g4 .countdown .progress-bar__progress {
   stroke: #5d279e;
-}
-
-.g5 .countdown {
-  color: #fff;
-}
-
-.g5 .countdown .progress-bar__background {
-  stroke: #10cfc9;
-}
-
-.g5 .countdown .progress-bar__progress {
-  stroke: #d00007;
 }
 
 .score-decor {

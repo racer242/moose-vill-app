@@ -5,6 +5,12 @@ const Game2Settings = {
     width: 960,
     height: 806,
   },
+  bgBounds: {
+    left: 0,
+    right: 0,
+    top: -45,
+    bottom: -45,
+  },
   objectBounds: {
     width: 186,
     height: 271,
@@ -308,10 +314,17 @@ const Game2Settings = {
           height: 51,
         },
         {
-          x: 44,
+          x: 16,
           y: 64,
+          width: 158,
+          height: 41,
+        },
+
+        {
+          x: 44,
+          y: 105,
           width: 95,
-          height: 107,
+          height: 66,
         },
       ],
       src: require("../images/game2/objects/o1.png"),
@@ -387,11 +400,14 @@ const Game2Settings = {
     height: 100,
   },
 
-  lifeCount: 25,
+  lifeCount: 30,
+  minLifeCountFactor: 0.5,
   deadCount: 0,
   switchCount: 0,
   killCount: 0,
   killingCount: 10,
+
+  bonusLife: 20,
 
   showballThrowSize: 300,
   showballSize: 50,
@@ -404,14 +420,15 @@ const Game2Settings = {
   showburstDuration: 500,
   snowParticlesCount: 30,
 
-  bonusLife: 20,
   transitionDuration: 500, //ms
+  showDurationFactor: 2,
+  killDurationFactor: 0.5,
 
   stepDuration: 50, //ms
   gameDuration: 60, //ms
   stopDuration: 2000, //ms
 
-  mobileScale: 1.2 * 0.889,
+  mobileScale: 0.96,
 };
 
 export default Game2Settings;

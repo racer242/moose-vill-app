@@ -94,6 +94,11 @@
 .g2-gameScene {
   position: absolute;
   display: block;
+}
+
+.g2-gameBg {
+  position: absolute;
+  display: block;
   background-image: url(../images/game2/bg-game.jpg);
   background-position: center center;
   background-repeat: no-repeat;

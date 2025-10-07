@@ -6,51 +6,51 @@
 
 .g2-light-item.i0 {
   left: 186px;
-  top: 86px;
+  top: 76px;
 }
 .g2-light-item.i1 {
   left: 236px;
-  top: 134px;
+  top: 124px;
 }
 .g2-light-item.i2 {
   left: 244px;
-  top: 179px;
+  top: 165px;
 }
 .g2-light-item.i3 {
   left: 290px;
   top: 120px;
 }
 .g2-light-item.i4 {
-  left: 321px;
-  top: 25px;
+  left: 315px;
+  top: 15px;
 }
 .g2-light-item.i5 {
   left: 396px;
-  top: 23px;
+  top: 13px;
 }
 .g2-light-item.i6 {
   left: 455px;
-  top: 0px;
+  top: -10px;
 }
 .g2-light-item.i7 {
   left: 522px;
-  top: 7px;
+  top: -4px;
 }
 .g2-light-item.i8 {
-  left: 720px;
+  left: 724px;
   top: 122px;
 }
 .g2-light-item.i9 {
-  left: 750px;
-  top: 157px;
+  left: 756px;
+  top: 154px;
 }
 .g2-light-item.i10 {
-  left: 742px;
-  top: 205px;
+  left: 725px;
+  top: 192px;
 }
 .g2-light-item.i11 {
   left: 640px;
-  top: 92px;
+  top: 72px;
 }
 
 .light-layer {
@@ -75,17 +75,19 @@
 }
 
 /* Генерируем уникальные анимации для каждого из 11 элементов */
-@for $i from 1 through 12 {
-  $delay: -1 * random(4000) * 1ms; // случайная задержка 0–4 сек
-  $duration: 6s + random(3000) * 1ms; // длительность 6–9 сек
+@for $i from 1 through 13 {
+  $delay: -1 * random(4000) * 1ms;
+  $duration: 4s + random(3000) * 1ms;
 
   .g2-light-item:nth-child(#{$i}) .star1 {
     animation: star-show1 $duration ease-in-out infinite;
     animation-delay: $delay;
+    opacity: 0.5;
   }
   .g2-light-item:nth-child(#{$i}) .star2 {
     animation: star-show2 $duration ease-in-out infinite;
     animation-delay: $delay;
+    opacity: 0.1;
   }
   .g2-light-item:nth-child(#{$i}) .star3 {
     animation: star-show3 $duration ease-in-out infinite;
@@ -97,33 +99,41 @@
   0%,
   100% {
     opacity: 1;
+    transform: scale(1);
   }
   33.3%,
   66.6% {
     opacity: 0;
+    transform: scale(0.3);
   }
 }
 @keyframes star-show2 {
   0%,
   66.6% {
     opacity: 0;
+    transform: scale(0);
   }
   33.3% {
     opacity: 1;
+    transform: scale(1);
   }
   100% {
     opacity: 0;
+    transform: scale(0);
   }
 }
 @keyframes star-show3 {
   0%,
   33.3% {
-    opacity: 0;
+    opacity: 0.2;
+    transform: scale(0.7);
   }
   66.6% {
     opacity: 1;
+    transform: scale(1.1);
   }
   100% {
-    opacity: 0;
+    transform: scale(0.7);
+    opacity: 0.2;
   }
 }

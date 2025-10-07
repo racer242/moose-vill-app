@@ -131,9 +131,18 @@ class Game2Page extends GamePage {
       obj.life--;
       if (obj.life < 0) {
         obj.status = "obj-on";
-        obj.life =
-          Math.round(Math.random() * this.state.game2.lifeCount) +
-          this.state.game2.lifeCount;
+
+        let time = this.state.game2.gameDuration - this.state.countdown;
+        let timeLeftFactor =
+          Math.pow(time / this.state.game2.gameDuration, 3) +
+          this.state.game2.minLifeCountFactor;
+
+        obj.life = Math.round(
+          Math.round(
+            ((Math.random() * this.state.game2.lifeCount) / 3) * 3 +
+              this.state.game2.lifeCount
+          ) * timeLeftFactor
+        );
       }
     } else if (obj.status == "obj-hide") {
       obj.life--;
@@ -349,6 +358,10 @@ class Game2Page extends GamePage {
   }
 
   render() {
+    let time = this.state.game2.gameDuration - this.state.countdown;
+    let timeLeft = 1 - time / this.state.game2.gameDuration;
+    let timeLeftFactor = 1 - timeLeft;
+
     let objs = [];
     for (let i = 0; i < this.state.objects.length; i++) {
       let obj = this.state.objects[i];
@@ -394,10 +407,12 @@ class Game2Page extends GamePage {
               backgroundSize: obj.backgroundSize,
               transitionDuration:
                 (obj.status == "obj-show"
-                  ? this.state.game2.transitionDuration / 2 +
-                    this.state.game2.transitionDuration * 2 * Math.random()
+                  ? this.state.game2.transitionDuration *
+                    this.state.game2.showDurationFactor *
+                    timeLeftFactor
                   : obj.status == "obj-kill"
-                  ? this.state.game2.transitionDuration / 2
+                  ? this.state.game2.transitionDuration *
+                    this.state.game2.killDurationFactor
                   : this.state.game2.transitionDuration) + "ms",
             }}
           >
@@ -494,8 +509,6 @@ class Game2Page extends GamePage {
       }
     }
 
-    let time = this.state.game2.gameDuration - this.state.countdown;
-
     return (
       <div className="g2 gamePage">
         <div className="gameScene">
@@ -515,6 +528,7 @@ class Game2Page extends GamePage {
             onPointerDown={this.scene_downHandler}
             onPointerMove={this.scene_moveHandler}
           >
+            <div className="g2-gameBg" style={this.state.game2.bgBounds}></div>
             {Array.from({ length: 12 }, (_, i) => (
               <div key={"light-item" + i} className={"g2-light-item i" + i}>
                 <div className="light-layer star1"></div>
@@ -580,9 +594,7 @@ class Game2Page extends GamePage {
           </div>
         </div>
         <div className={"countdown display " + (time < 10 ? " warning" : "")}>
-          <CircularProgress value={1 - time / this.state.game2.gameDuration}>
-            {time}
-          </CircularProgress>
+          <CircularProgress value={timeLeft}>{time}</CircularProgress>
         </div>
         <div
           className={

@@ -56,7 +56,84 @@
   top: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  visibility: hidden;
+  mix-blend-mode: lighten;
+}
+
+.g3-ball:hover .g3-ball-light {
+  visibility: visible !important;
+  animation: low-flicker 500ms infinite;
+}
+
+.g3-ball:nth-child(1) .flicker {
+  animation: flicker 2.4s 0.1s infinite;
+}
+.g3-ball:nth-child(2) .flicker {
+  animation: flicker 3.1s 0.5s infinite;
+}
+.g3-ball:nth-child(3) .flicker {
+  animation: flicker 2.7s 0.3s infinite;
+}
+.g3-ball:nth-child(4) .flicker {
+  animation: flicker 4.2s 0.8s infinite;
+}
+.g3-ball:nth-child(5) .flicker {
+  animation: flicker 3.6s 0.2s infinite;
+}
+.g3-ball:nth-child(6) .flicker {
+  animation: flicker 2.9s 0.6s infinite;
+}
+.g3-ball:nth-child(7) .flicker {
+  animation: flicker 3.9s 0.4s infinite;
+}
+.g3-ball:nth-child(8) .flicker {
+  animation: flicker 2.5s 0.9s infinite;
+}
+.g3-ball:nth-child(9) .flicker {
+  animation: flicker 3.3s 0.7s infinite;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  10% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  30% {
+    opacity: 0.9;
+  }
+  40% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.7;
+  }
+  70% {
+    opacity: 0.95;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 1;
+  }
+}
+
+@keyframes low-flicker {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.4;
+  }
 }
 
 .g3-tree-lights {
@@ -85,6 +162,10 @@
 .l3 {
   background-image: url(../images/game3/t-lights3.png);
   animation-delay: 600ms;
+}
+
+.g3-tree-lights.fast {
+  animation-duration: 500ms;
 }
 
 @keyframes fadeCycle {
@@ -117,6 +198,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   animation: switchCycle 900ms infinite;
+  mix-blend-mode: lighten;
 }
 
 .b1 {
@@ -150,27 +232,200 @@
   }
 }
 
-.g3-gameObjectBox {
+.g3-star-light {
   position: absolute;
   display: block;
-  width: 100%;
-  height: 100%;
-  transition-property: transform opacity;
-  background-color: rgba(0, 0, 0, 0);
   pointer-events: none;
-  transition-property: transform opacity left top;
-  transition-timing-function: ease-in;
-}
-
-.g3-gameObject {
-  position: absolute;
-  display: block;
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  height: 100%;
-  background-size: contain;
+  left: 89px;
+  top: -38px;
+  width: 153px;
+  height: 149px;
+  background-image: url(../images/game3/star-light.png);
   background-position: center center;
   background-repeat: no-repeat;
+  background-size: cover;
+  animation: star-light 1000ms ease-in infinite;
+  mix-blend-mode: lighten;
+}
+
+@keyframes star-light {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.g3-house-lights {
+  position: absolute;
+  display: block;
   pointer-events: none;
+  left: 683px;
+  top: 229px;
+  width: 147px;
+  height: 123px;
+  background-image: url(../images/game3/house-lights.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  animation: fadeCycle 500ms ease-in infinite;
+  mix-blend-mode: screen;
+}
+
+.mobile .g3-house-lights {
+  left: 515px;
+  top: 359px;
+  transform: scale(1.8);
+}
+
+.g3-house-flick-lights {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  left: 169px;
+  top: 233px;
+  width: 118px;
+  height: 119px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  animation: fadeCycle 1200ms infinite;
+  mix-blend-mode: darken;
+}
+
+.mobile .g3-house-flick-lights {
+  left: -122px;
+  top: 365px;
+  transform: scale(1.7);
+}
+
+.fl1 {
+  background-image: url(../images/game3/house-light1.png);
+  animation-delay: 0s;
+}
+.fl2 {
+  background-image: url(../images/game3/house-light2.png);
+  animation-delay: 400ms;
+}
+.fl3 {
+  background-image: url(../images/game3/house-light3.png);
+  animation-delay: 800ms;
+}
+
+.g3-moose {
+  position: absolute;
+  display: block;
+  width: 125px;
+  height: 160px;
+  background-size: 250px 160px;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  animation: g3-is-blinking 3000ms steps(1) infinite,
+    wobble 6000ms ease-in-out infinite;
+  transform-origin: center bottom;
+}
+.mobile .g3-moose {
+  width: 187px;
+  height: 240px;
+  background-size: 374px 240px;
+  background-repeat: no-repeat;
+}
+
+.moose1 {
+  left: 587px;
+  top: 270px;
+  background-image: url(../images/game3/moose1.png);
+  animation-delay: 0ms;
+}
+.mobile .moose1 {
+  left: 375px;
+  top: 390px;
+}
+
+.moose2 {
+  left: 652px;
+  top: 315px;
+  background-image: url(../images/game3/moose2.png);
+  animation-delay: 1000ms;
+}
+.mobile .moose2 {
+  left: 378px;
+  top: 581px;
+}
+
+.moose3 {
+  left: 192px;
+  top: 326px;
+  background-image: url(../images/game3/moose3.png);
+  animation-delay: 2000ms;
+}
+.mobile .moose3 {
+  left: -70px;
+  top: 465px;
+}
+
+@keyframes g3-is-blinking {
+  0%,
+  18%,
+  22%,
+  28%,
+  32%,
+  58%,
+  62%,
+  100% {
+    background-position: 0 0;
+  }
+
+  19%,
+  21%,
+  29%,
+  31%,
+  59%,
+  61% {
+    background-position: 100% 0;
+  }
+}
+
+@keyframes wobble {
+  0%,
+  100% {
+    transform: scaleY(1) rotate(0deg);
+  }
+  12% {
+    transform: scaleY(0.996) rotate(-0.25deg);
+  }
+  24% {
+    transform: scaleY(0.998) rotate(0.18deg);
+  }
+  36% {
+    transform: scaleY(0.995) rotate(0.32deg); /* максимальное "приседание" */
+  }
+  48% {
+    transform: scaleY(0.997) rotate(-0.15deg);
+  }
+  60% {
+    transform: scaleY(0.996) rotate(0.28deg);
+  }
+  72% {
+    transform: scaleY(0.999) rotate(-0.35deg);
+  }
+  84% {
+    transform: scaleY(0.9955) rotate(0.09deg);
+  }
+  96% {
+    transform: scaleY(0.9975) rotate(0.21deg);
+  }
 }

@@ -7,9 +7,20 @@ class Game3Page extends GamePage {
   constructor(props) {
     super(props);
 
+    let balls = [];
+    for (let i = 0; i < this.state.game3.ballSources.length; i++) {
+      let ball = this.state.game3.ballSources[i];
+      balls.push({
+        ...ball,
+        selected: false,
+      });
+    }
+
     this.state = {
       ...this.state,
       bonuses: [],
+      win: false,
+      balls,
     };
   }
 
@@ -47,8 +58,8 @@ class Game3Page extends GamePage {
 
   render() {
     let balls = [];
-    for (let i = 0; i < this.state.game3.ballSources.length; i++) {
-      let ball = this.state.game3.ballSources[i];
+    for (let i = 0; i < this.state.balls.length; i++) {
+      let ball = this.state.balls[i];
       balls.push(
         <div
           key={ball.id}
@@ -61,9 +72,10 @@ class Game3Page extends GamePage {
           }}
         >
           <div
-            className="g3-ball-light"
+            className={"g3-ball-light" + (this.state.win ? " flicker" : "")}
             style={{
               backgroundImage: `url(${ball.srcLight})`,
+              visibility: ball.selected ? "visible" : "hidden",
             }}
           ></div>
         </div>
@@ -129,15 +141,43 @@ class Game3Page extends GamePage {
               }}
             ></div>
 
+            <div className="g3-house-lights"></div>
+
+            <div className="g3-house-flick-lights fl1"></div>
+            <div className="g3-house-flick-lights fl2"></div>
+            <div className="g3-house-flick-lights fl3"></div>
+
+            <div className="g3-moose moose1"></div>
+
+            <div className="g3-moose moose3"></div>
+
             <div className="g3-tree">
-              <div className="g3-tree-lights l1"></div>
-              <div className="g3-tree-lights l2"></div>
-              <div className="g3-tree-lights l3"></div>
-              <div className="g3-tree-balls b1"></div>
-              <div className="g3-tree-balls b2"></div>
-              <div className="g3-tree-balls b3"></div>
-              {balls}
+              <div
+                className={
+                  "g3-tree-lights l1" + (this.state.win ? " fast" : "")
+                }
+              ></div>
+              <div
+                className={
+                  "g3-tree-lights l2" + (this.state.win ? " fast" : "")
+                }
+              ></div>
+              <div
+                className={
+                  "g3-tree-lights l3" + (this.state.win ? " fast" : "")
+                }
+              ></div>
+              {this.state.win && (
+                <>
+                  <div className="g3-tree-balls b1"></div>
+                  <div className="g3-tree-balls b2"></div>
+                  <div className="g3-tree-balls b3"></div>
+                  <div className="g3-star-light"></div>
+                </>
+              )}
+              <div>{balls}</div>
             </div>
+            <div className="g3-moose moose2"></div>
           </div>
         </div>
         <div className={"countdown display " + (time < 10 ? " warning" : "")}>

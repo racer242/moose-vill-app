@@ -451,6 +451,14 @@
   color: #222221;
 }
 
+.finishPage {
+  background-color: #5d279e;
+}
+
+.finishPage .pageBg {
+  opacity: 0.2;
+}
+
 .g1 .pageBg {
   background-color: #d9bed2;
   background-image: url(../images/game1/bg.jpg);
@@ -490,7 +498,6 @@
 }
 
 .g3 .pageBg {
-  background-color: #2f3138;
   background-image: url(../images/game3/bg-common.jpg);
   background-size: cover;
 }

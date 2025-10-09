@@ -190,6 +190,15 @@
   stroke: #1e9800;
 }
 
+.g3 .countdown.is-starting .progress-bar__background {
+  stroke: #c50018;
+}
+
+.g3 .countdown.is-starting .progress-bar__progress {
+  stroke: #fff;
+  transition-duration: 500ms;
+}
+
 .g4 .bonus {
   background-image: url(../images/game4/bonus.svg);
   color: #fff;

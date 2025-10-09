@@ -84,16 +84,13 @@
 }
 
 #Preloader.g2 {
-  background-color: #1d083f;
+  background: linear-gradient(180deg, #9d1fe1 0%, #5d279e 100%);
 }
 #Preloader.g3 {
-  background: linear-gradient(0deg, #242527 0.06%, #373944 100%);
+  background: linear-gradient(180deg, #9d1fe1 0%, #5d279e 100%);
 }
 #Preloader.g4 {
   background: linear-gradient(180deg, #52bae0 0%, #b7e8fd 100%);
-}
-#Preloader.g5 {
-  background-color: #a20006;
 }
 
 .preloader-display {
@@ -108,28 +105,23 @@
 }
 
 .preloader-display.g1 {
-  border: #5d279e 17px solid;
-  border-left-color: #ffd100;
+  border: #8755ea 17px solid;
+  border-left-color: #fff;
 }
 
 .preloader-display.g2 {
-  border: #5d279e 17px solid;
-  border-left-color: #ffd100;
+  border: #fff 17px solid;
+  border-left-color: #e11f26;
 }
 
 .preloader-display.g3 {
-  border: #5d279e 17px solid;
-  border-left-color: #a0e0fc;
+  border: #fff 17px solid;
+  border-left-color: #1e9800;
 }
 
 .preloader-display.g4 {
   border: #5d279e 17px solid;
   border-left-color: #a0e0fc;
-}
-
-.preloader-display.g5 {
-  border: #d00007 17px solid;
-  border-left-color: #10cfc9;
 }
 
 .preload-spin {

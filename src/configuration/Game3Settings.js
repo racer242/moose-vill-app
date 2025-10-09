@@ -75,9 +75,12 @@ const Game3Settings = {
 
   transitionDuration: 200, //ms
 
-  stepDuration: 500, //ms
+  playingBallDuration: 1000, //ms
+
+  stepDuration: 100, //ms
   gameDuration: 60, //s
   stopDuration: 2000, //ms
+  finishingDuration: 5000, //ms
   animationDuration: 4000, //ms
 };
 

@@ -1,5 +1,6 @@
 import React from "react";
 import "../css/game3.css";
+import "../css/fireworks-particles.scss";
 import GamePage from "./GamePage";
 import { shuffle } from "../utils/arrayTools";
 import CircularProgress from "../components/CircularProgress";
@@ -13,7 +14,6 @@ class Game3Page extends GamePage {
       gameDuration: this.state.game3.gameDuration,
       stopDuration: this.state.game3.stopDuration,
       stepDuration: this.state.game3.stepDuration,
-      bonuses: [],
       win: false,
       ...this.fillBalls(),
       userSequence: [],
@@ -35,6 +35,7 @@ class Game3Page extends GamePage {
       balls.push({
         ...ball,
         selected: false,
+        revealed: 0,
       });
       sequence.push({
         ...ball,
@@ -125,6 +126,7 @@ class Game3Page extends GamePage {
       sequence[repeatingBallIndex].revealed = true;
       let ball = balls.filter((v) => v.id === ballId)[0];
       ball.selected = true;
+      ball.revealed = ball.revealed + 1;
       repeatingBallIndex++;
       if (repeatingBallIndex >= sequence.length) {
         win = true;
@@ -158,9 +160,26 @@ class Game3Page extends GamePage {
   }
 
   render() {
+    let particles = [];
+    if (this.state.win) {
+      for (let i = 0; i < this.state.game3.particlesCount; i++) {
+        particles.push(
+          <div key={"p" + i} className="fireworks-particle"></div>
+        );
+      }
+    }
+
     let balls = [];
     for (let i = 0; i < this.state.balls.length; i++) {
       let ball = this.state.balls[i];
+
+      let ballParticles = [];
+      for (let i = 0; i < this.state.game3.particlesCount; i++) {
+        ballParticles.push(
+          <div key={"p" + i} className="ball-fireworks-particle"></div>
+        );
+      }
+
       balls.push(
         <div
           key={ball.id}
@@ -177,6 +196,12 @@ class Game3Page extends GamePage {
           }}
           onClick={this.ball_clickHandler}
         >
+          {ball.revealed === 1 && (
+            <div className="ball-fireworks-particle-container">
+              {ballParticles}
+            </div>
+          )}
+
           <div
             className={"g3-ball-light" + (this.state.win ? " flicker" : "")}
             style={{
@@ -242,36 +267,13 @@ class Game3Page extends GamePage {
       );
     }
 
-    let bonuses = [];
-    for (let i = 0; i < this.state.bonuses.length; i++) {
-      let bonus = this.state.bonuses[i];
-      let particles = [];
-      if (bonus.value > 0) {
-        for (let j = 0; j < this.state.particlesCount; j++) {
-          particles.push(<div key={"p" + j} className="particle"></div>);
-        }
-      }
-      bonuses.push(
-        <div key={bonus.id}>
-          <div
-            className="particle-container"
-            style={{
-              left: bonus.cssX,
-              top: bonus.cssY,
-            }}
-          >
-            {particles}
-          </div>
-        </div>
-      );
-    }
-
     let time = this.state.isStarting
       ? 4 - this.state.countdown
       : this.state.game3.gameDuration - this.state.countdown;
     let timeLeft = this.state.isStarting
       ? Math.max(1 + 1 / 3 - time / 3, 0)
       : 1 - time / this.state.game3.gameDuration;
+
     return (
       <div className="g3 gamePage">
         <div className="gameScene">
@@ -314,6 +316,9 @@ class Game3Page extends GamePage {
             <div className="g3-moose moose1"></div>
 
             <div className="g3-moose moose3"></div>
+            {this.state.win && (
+              <div className="fireworks-particle-container">{particles}</div>
+            )}
 
             <div className="g3-tree">
               <div

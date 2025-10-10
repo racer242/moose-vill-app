@@ -165,19 +165,6 @@
   stroke: #e11f26;
 }
 
-.g3 .bonus {
-  background-image: url(../images/game3/bonus.svg);
-  color: #fff;
-}
-.g3 .bonus.negative {
-  color: #5d279e;
-}
-
-.g3 .score {
-  background-image: url(../images/game3/bonus-display.svg);
-  color: #ff49b8;
-}
-
 .g3 .countdown {
   color: #fff;
 }

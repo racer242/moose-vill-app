@@ -22,7 +22,7 @@ class GamePage extends Component {
     };
 
     this.closeButton_clickHandler = this.closeButton_clickHandler.bind(this);
-    this.initCount = 0;
+    // this.initCount = 0;
     this.counter = 0;
     if (this.countdownTimer != null) clearTimeout(this.countdownTimer);
     if (this.gameTimer != null) clearTimeout(this.gameTimer);
@@ -121,18 +121,18 @@ class GamePage extends Component {
   stepGame() {
     if (this.doGame()) {
       if (this.gameTimer != null) clearTimeout(this.gameTimer);
-      if (this.initCount > 1) {
-        this.gameTimer = setTimeout(
-          this.stepGame.bind(this),
-          this.state.stepDuration
-        );
-      } else {
-        this.initCount++;
-        this.gameTimer = setTimeout(
-          this.stepGame.bind(this),
-          this.state.stepDuration / 100
-        );
-      }
+      // if (this.initCount > 1) {
+      this.gameTimer = setTimeout(
+        this.stepGame.bind(this),
+        this.state.stepDuration
+      );
+      // } else {
+      //   this.initCount++;
+      //   this.gameTimer = setTimeout(
+      //     this.stepGame.bind(this),
+      //     this.state.stepDuration
+      //   );
+      // }
     }
   }
 
@@ -170,12 +170,11 @@ class GamePage extends Component {
       this.finishGame();
       return false;
     }
-
+    this.countdown++;
     this.setState({
       ...this.state,
       countdown: this.countdown,
     });
-    this.countdown++;
     return true;
   }
 

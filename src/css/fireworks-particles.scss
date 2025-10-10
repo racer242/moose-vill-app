@@ -1,0 +1,103 @@
+$d: 11px;
+$s: 200px;
+$s1: 200px;
+
+.fireworks-particle-container {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  left: 50%;
+  top: 10%;
+}
+
+.mobile .fireworks-particle-container {
+  top: 20%;
+}
+
+.ball-fireworks-particle-container {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  left: 10px;
+  top: 10px;
+}
+
+.fireworks-particle {
+  position: absolute;
+  pointer-events: none;
+  width: $d;
+  height: $d;
+  animation: shoot 1s ease-out infinite;
+  animation-name: shoot, fade;
+
+  @for $i from 0 to 30 {
+    $t: (1 + 0.01 * random(100)) * 1s;
+
+    $snowflakeNum: random(16);
+
+    $sizeAdd: 4px + random(11) * 1px; // random(11) → 0..10 → итого 10..20px
+    $finalSize: $d + $sizeAdd;
+    $rotateDeg: 60+ (270/30) * $i; //random(360);
+
+    &:nth-child(#{$i + 1}) {
+      width: $finalSize;
+      height: $finalSize;
+      transform: 
+      // translate(random($s) * 1px - $s/2, random($s) * 1px - $s/2)
+        rotate(#{$rotateDeg}deg) translateY((100 + random($s)) * 1px);
+      background-image: url("../images/game3/fireworks/fireworks#{$snowflakeNum}.svg");
+      background-size: contain;
+      animation-duration: $t;
+      animation-delay: 0.001 * random(100) * $t;
+      animation-fill-mode: both;
+    }
+  }
+}
+
+.ball-fireworks-particle {
+  position: absolute;
+  pointer-events: none;
+  width: $d;
+  height: $d;
+  animation: shoot 1s ease-out;
+  animation-name: shoot, fade;
+
+  @for $i from 0 to 20 {
+    $t: (1 + 0.01 * random(100)) * 1s;
+
+    $snowflakeNum: random(16);
+
+    $sizeAdd: 4px + random(11) * 1px; // random(11) → 0..10 → итого 10..20px
+    $finalSize: $d + $sizeAdd;
+    $rotateDeg: random(360);
+
+    &:nth-child(#{$i + 1}) {
+      width: $finalSize;
+      height: $finalSize;
+      transform: translate(random($s1) * 1px - $s1/2, random($s1) * 1px - $s1/2)
+        rotate(#{$rotateDeg}deg);
+      background-image: url("../images/game3/fireworks/fireworks#{$snowflakeNum}.svg");
+      background-size: contain;
+      animation-duration: $t;
+      animation-delay: 0.001 * random(100) * $t;
+      animation-fill-mode: both;
+    }
+  }
+}
+
+@keyframes shoot {
+  0% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

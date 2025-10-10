@@ -14,10 +14,21 @@ class Game1Page extends GamePage {
       bonuses: [],
       gameDuration: this.state.game1.gameDuration,
       stopDuration: this.state.game1.stopDuration,
-      stepDuration: this.state.game1.stepDuration,
+      stepDuration: this.state.game1.stepDuration / 10,
     };
 
+    this.initCount = 0;
+
     this.objButton_clickHandler = this.objButton_clickHandler.bind(this);
+  }
+
+  doStart() {
+    this.initTimer = setTimeout(() => {
+      this.setState({
+        ...this.state,
+        stepDuration: this.state.game1.stepDuration,
+      });
+    }, 300);
   }
 
   updateObjBounds(obj) {

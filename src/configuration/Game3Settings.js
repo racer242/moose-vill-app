@@ -77,6 +77,8 @@ const Game3Settings = {
 
   playingBallDuration: 1000, //ms
 
+  particlesCount: 30,
+
   stepDuration: 100, //ms
   gameDuration: 60, //s
   stopDuration: 2000, //ms

@@ -529,3 +529,24 @@
     transform: translateX(200px);
   }
 }
+
+.play-icon {
+  position: absolute;
+  background-image: url(../images/game3/play.svg);
+  width: 22px;
+  height: 26px;
+  background-size: 22px 26px;
+  background-repeat: no-repeat;
+  transform: translate(-37%, -50%);
+  animation: play-icon 600ms ease-in-out infinite;
+}
+
+@keyframes play-icon {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}

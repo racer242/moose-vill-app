@@ -178,12 +178,21 @@
 }
 
 .g3 .countdown.is-starting .progress-bar__background {
-  stroke: #c50018;
+  stroke: #fff;
 }
 
 .g3 .countdown.is-starting .progress-bar__progress {
-  stroke: #fff;
+  stroke: #c50018;
   transition-duration: 500ms;
+}
+
+.g3 .countdown.is-playing .progress-bar__background {
+  stroke: #fff;
+}
+
+.g3 .countdown.is-playing .progress-bar__progress {
+  stroke: #c50018;
+  /* transition-duration: 500ms; */
 }
 
 .g4 .bonus {

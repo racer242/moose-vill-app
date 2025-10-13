@@ -1,11 +1,6 @@
 import { isMobile, isLocal } from "../core/helpers";
 
 const Game3Settings = {
-  bonusBounds: {
-    width: 100,
-    height: 100,
-  },
-
   ballSources: [
     {
       id: "ball1",
@@ -71,13 +66,12 @@ const Game3Settings = {
       srcLight: require("../images/game3/balls/shar-9-light.png"),
     },
   ],
-  bonusLife: 3,
 
   transitionDuration: 200, //ms
-
   playingBallDuration: 1000, //ms
-
   particlesCount: 30,
+
+  clearBallsAfterFail: false,
 
   stepDuration: 100, //ms
   gameDuration: 60, //s

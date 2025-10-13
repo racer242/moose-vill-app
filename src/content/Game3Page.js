@@ -72,7 +72,7 @@ class Game3Page extends GamePage {
       });
 
       this.startPlayingTimeout = setTimeout(() => {
-        this.countdown = 0;
+        this.countdown = 10;
         this.setState({
           ...this.state,
           isStarting: false,
@@ -90,11 +90,13 @@ class Game3Page extends GamePage {
     this.startRepeatingTimeout = setTimeout(() => {
       let playingBallIndex = this.state.playingBallIndex + 1;
       let isRepeating = playingBallIndex >= this.state.sequence.length;
+      this.countdown = 0;
       this.setState({
         ...this.state,
-        isPlaying: false,
+        isPlaying: !isRepeating,
         playingBallIndex,
         isRepeating,
+        countdown: this.countdown,
       });
 
       if (!isRepeating) {
@@ -143,11 +145,13 @@ class Game3Page extends GamePage {
         }, this.state.game3.finishingDuration);
       }
     } else {
-      repeatingBallIndex = 0;
-      balls = balls.map((v) => {
-        v.selected = false;
-        return v;
-      });
+      if (this.state.game3.clearBallsAfterFail) {
+        repeatingBallIndex = 0;
+        balls = balls.map((v) => {
+          v.selected = false;
+          return v;
+        });
+      }
     }
 
     this.setState({
@@ -269,9 +273,13 @@ class Game3Page extends GamePage {
 
     let time = this.state.isStarting
       ? 4 - this.state.countdown
+      : this.state.isPlaying
+      ? 0
       : this.state.game3.gameDuration - this.state.countdown;
     let timeLeft = this.state.isStarting
-      ? Math.max(1 + 1 / 3 - time / 3, 0)
+      ? Math.min(Math.max(1 + 1 / 3 - time / 3, 0), 1)
+      : this.state.isPlaying
+      ? 1
       : 1 - time / this.state.game3.gameDuration;
 
     return (
@@ -352,11 +360,17 @@ class Game3Page extends GamePage {
         <div
           className={
             "countdown display " +
-            (time < 10 && !this.state.isStarting ? " warning" : "") +
-            (this.state.isStarting ? " is-starting" : "")
+            (time < 10 && !this.state.isStarting && !this.state.isPlaying
+              ? " warning"
+              : "") +
+            (this.state.isStarting ? " is-starting" : "") +
+            (this.state.isPlaying ? " is-playing" : "")
           }
         >
-          <CircularProgress value={timeLeft}>{time}</CircularProgress>
+          <CircularProgress value={timeLeft}>
+            {!this.state.isPlaying && <>{time}</>}
+            {this.state.isPlaying && <div className="play-icon"></div>}
+          </CircularProgress>
         </div>
         <div className="g3-sequence-container">{sequence}</div>
 

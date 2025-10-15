@@ -61,7 +61,7 @@ const Game3Settings = {
     {
       id: "ball9",
       x: 63,
-      y: 309,
+      y: 307,
       src: require("../images/game3/balls/shar-9.png"),
       srcLight: require("../images/game3/balls/shar-9-light.png"),
     },
@@ -75,7 +75,7 @@ const Game3Settings = {
   savePointAfter: 3,
 
   stepDuration: 100, //ms
-  gameDuration: 600, //s
+  gameDuration: 60, //s
   stopDuration: 2000, //ms
   finishingDuration: 5000, //ms
   animationDuration: 4000, //ms

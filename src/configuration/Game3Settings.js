@@ -71,10 +71,11 @@ const Game3Settings = {
   playingBallDuration: 1000, //ms
   particlesCount: 30,
 
-  clearBallsAfterFail: false,
+  clearBallsAfterFail: true,
+  savePointAfter: 3,
 
   stepDuration: 100, //ms
-  gameDuration: 60, //s
+  gameDuration: 600, //s
   stopDuration: 2000, //ms
   finishingDuration: 5000, //ms
   animationDuration: 4000, //ms

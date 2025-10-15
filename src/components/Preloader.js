@@ -16,7 +16,7 @@ class Preloader extends Component {
       };
     } else this.state = { gameIndex: 1 };
 
-    this.images = window.gameIndex ? resources[this.state.gameIndex] : [];
+    this.images = null;
   }
 
   componentDidMount() {
@@ -38,6 +38,12 @@ class Preloader extends Component {
   onStoreChange() {
     if (this.mounted) {
       let state = this.store.getState();
+
+      let gameIndex = window.gameIndex ?? state.gameIndex;
+      this.images = resources[gameIndex] ?? [];
+      this.images = this.images.filter(
+        (v) => Object.prototype.toString.call(v) === "[object String]"
+      );
       this.setState({
         ...this.state,
         ...state,
@@ -46,8 +52,8 @@ class Preloader extends Component {
   }
 
   preloader_completeHandler(event) {
-    console.log("Preload complete");
-    // return;
+    console.log("Preload complete", this.images?.length);
+    if (!this.images) return;
     setTimeout(() => {
       setTimeout(() => {
         this.store.dispatch(preloadComplete());
@@ -75,7 +81,7 @@ class Preloader extends Component {
         <Preload
           children={<div></div>}
           loadingIndicator={<div></div>}
-          images={this.images}
+          images={this.images ?? []}
           autoResolveDelay={3000}
           onError={this.preloader_errorHandler}
           onSuccess={this.preloader_completeHandler}

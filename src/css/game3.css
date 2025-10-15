@@ -436,7 +436,7 @@
 
 .g3-sequence-container {
   position: absolute;
-  left: 38px;
+  left: 60px;
   top: 116px;
   display: flex;
   flex-direction: column;
@@ -446,6 +446,21 @@
   background-color: rgba(255, 255, 255, 0.6);
   padding: 8px;
   gap: 8px;
+  border-radius: 64px;
+  transform: translateX(-50%);
+}
+
+.g3-sequence-group-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 4px;
+  gap: 8px;
+  border: 1px solid #fff;
   border-radius: 64px;
 }
 

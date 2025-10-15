@@ -39,6 +39,7 @@ class Game3Page extends GamePage {
       });
       sequence.push({
         ...ball,
+        index: i,
         revealed: false,
       });
     }
@@ -90,6 +91,7 @@ class Game3Page extends GamePage {
     this.startRepeatingTimeout = setTimeout(() => {
       let playingBallIndex = this.state.playingBallIndex + 1;
       let isRepeating = playingBallIndex >= this.state.sequence.length;
+      playingBallIndex = isRepeating ? -1 : playingBallIndex;
       this.countdown = 0;
       this.setState({
         ...this.state,
@@ -146,11 +148,20 @@ class Game3Page extends GamePage {
       }
     } else {
       if (this.state.game3.clearBallsAfterFail) {
-        repeatingBallIndex = 0;
-        balls = balls.map((v) => {
-          v.selected = false;
-          return v;
-        });
+        if (this.state.game3.savePointAfter === 0) {
+          repeatingBallIndex = 0;
+          balls = balls.map((v) => {
+            v.selected = false;
+            return v;
+          });
+        } else {
+          repeatingBallIndex =
+            Math.floor(repeatingBallIndex / this.state.game3.savePointAfter) *
+            this.state.game3.savePointAfter;
+          for (let i = 0; i < sequence.length; i++) {
+            balls[sequence[i].index].selected = i < repeatingBallIndex;
+          }
+        }
       }
     }
 
@@ -237,7 +248,7 @@ class Game3Page extends GamePage {
           id={ball.id}
           className="g3-sequence-ball"
           style={
-            ball.revealed
+            i <= this.state.playingBallIndex || ball.revealed
               ? {
                   backgroundImage: `url(${ball.src})`,
                 }
@@ -252,7 +263,9 @@ class Game3Page extends GamePage {
                 : "")
             }
             style={{
-              visibility: !ball.revealed ? "visible" : "hidden",
+              visibility: !(i <= this.state.playingBallIndex || ball.revealed)
+                ? "visible"
+                : "hidden",
               // backgroundImage: `url(${ball.src})`,
               // opacity: ball.revealed ? "1" : "0.5",
             }}
@@ -372,7 +385,35 @@ class Game3Page extends GamePage {
             {this.state.isPlaying && <div className="play-icon"></div>}
           </CircularProgress>
         </div>
-        <div className="g3-sequence-container">{sequence}</div>
+
+        {this.state.game3.savePointAfter === 0 && (
+          <div className="g3-sequence-container">{sequence}</div>
+        )}
+        {this.state.game3.savePointAfter > 0 && (
+          <div className="g3-sequence-container">
+            {Array.from(
+              {
+                length: Math.ceil(
+                  sequence.length / this.state.game3.savePointAfter
+                ),
+              },
+              (_, groupIndex) => {
+                const start = groupIndex * this.state.game3.savePointAfter;
+                return (
+                  <div key={groupIndex} className="g3-sequence-group-container">
+                    {sequence
+                      .slice(start, start + this.state.game3.savePointAfter)
+                      .map((item, i) => (
+                        <div key={i} className="item">
+                          {item}
+                        </div>
+                      ))}
+                  </div>
+                );
+              }
+            )}
+          </div>
+        )}
 
         {this.state.isStarting && (
           <>

@@ -196,7 +196,6 @@
 }
 
 .g4 .bonus {
-  background-image: url(../images/game4/bonus.svg);
   color: #fff;
 }
 .g4 .bonus.negative {
@@ -204,7 +203,6 @@
 }
 
 .g4 .score {
-  background-image: url(../images/game4/bonus-display.svg);
   color: #ff49b8;
 }
 

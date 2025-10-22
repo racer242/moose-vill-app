@@ -530,6 +530,7 @@
 }
 
 .g4 .logo {
+  display: block;
 }
 
 .hint-right,

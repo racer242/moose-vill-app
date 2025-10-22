@@ -7,14 +7,17 @@
 //   <div id="root" class="game" oninit="onAppReadyHandler"></div>
 // </div>
 
+// Установить название игры.
 // Просто переменная - используется внутри этого файла для удобства,
 // передается ниже в конфигурацию, сама на приложение не влияет
 window.gameId = "LIGHTUP"; //"VIBE"; //"SNOWBALL"; //"LIGHTUP";
 
+// Указать, авторизован пользователь или нет
 // Просто переменная - используется внутри этого файла для удобства,
 // передается ниже в конфигурацию, сама на приложение не влияет
 window.userAuthorized = true; //true; false;
 
+// Указать, закончилась ли акция или нет
 // Просто переменная - используется внутри этого файла для удобства,
 // передается ниже в конфигурацию, сама на приложение не влияет
 window.activityIsOver = false; //true; false;
@@ -74,6 +77,7 @@ function onAppReadyHandler(app) {
       // id - для передачи кода игры
       // request1 - запрос до старта
       // request2 - запрос после старта
+      // Чтобы игра передавала данные, надо закомментированные строчки открыть, и закрыть строчки с заглушками
       1: {
         id: "VIBE",
         // request1: { url: "/api/TentGame", method: "POST" },
@@ -95,28 +99,20 @@ function onAppReadyHandler(app) {
         // request2: { url: "/api/TentGame", method: "POST" },
         request2: { url: "/api/TentGame2.json", method: "GET" },
       },
-      4: {
-        id: "STAGE",
-        request1: { url: "/api/TentGame", method: "POST" },
-        request2: { url: "/api/TentGame", method: "POST" },
-      },
-      5: {
-        id: "FIVE",
-        request1: { url: "/api/PlayVip", method: "POST" },
-        // request1: { url: "/api/FiveGame1.json", method: "GET" },
-        request2: { url: "/api/PlayVip", method: "POST" },
-        // request2: { url: "/api/FiveGame2.json", method: "GET" },
-      },
       // Это индекс игр для быстрой идентификации внутри приложения
-      index: { VIBE: 1, SNOWBALL: 2, LIGHTUP: 3, STAGE: 4, FIVE: 5 },
+      index: { VIBE: 1, SNOWBALL: 2, LIGHTUP: 3 },
     },
     // Обработчик закрытия попапа
     closeHandler: window.closeGamePopup,
     // Обработчик перехода к регистрации чека
     registerHandler: window.registerBill,
+    // Обработчик перехода к регистрации пользователя
     signUpHandler: window.signUp,
+    // Значение ширины окна, при котором происходит переключение на мобильную версию
     switchToMobileWidth: 720,
+    // Указать, авторизован пользователь или нет
     userNotAuthorized: !window.userAuthorized,
+    // Указать, действует ли еще акция или нет
     activityIsOver: window.activityIsOver,
   };
 

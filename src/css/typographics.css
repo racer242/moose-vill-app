@@ -155,3 +155,32 @@
   font-size: 14px;
   line-height: 18px;
 }
+
+.g4-select-title {
+  position: absolute;
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 135%;
+  text-align: center;
+  color: #ffffff;
+}
+
+.mobile .g4-select-title {
+  font-size: 24px;
+}
+
+.g4-select-hint {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 135%;
+  text-align: center;
+  color: #ffffff;
+}
+
+.mobile .g4-select-hint {
+  font-size: 18px;
+}

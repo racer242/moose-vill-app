@@ -35,33 +35,39 @@ class Main4Page extends Component {
     children.push(this.props.children);
 
     return (
-      <div className="g4 mainPage">
+      <div className="mainPage g4">
         <div className="pageBg"></div>
-
-        <div className="parallax3"></div>
-        <div className="parallax2"></div>
-        <div className="parallax1"></div>
-
+        <div>
+          <div className="pageBg-head-snowflake floating-large"></div>
+          <div className="pageBg-head-snowflake floating-large"></div>
+          <div className="pageBg-head-snowflake floating-large"></div>
+        </div>
+        <div className="pageBg-head slow-pulsing"></div>
         <div className="head appear-zoom">
+          <div className="logo-bg logo-bg-pulsing"></div>
+          <div className="logo-snow-left"></div>
+          <div className="logo-snow-right"></div>
           <div className="logo floating"></div>
-          <h1>Вперед к сцене</h1>
+          <h1 className="caps">Тайный Лосянта</h1>
         </div>
         <div className="plate appear-top delay500ms">
-          <h3>Доберись до Главной сцены Добрый Fest!</h3>
+          <p>Угадай Тайного лосянту!</p>
           <p className="orange">
-            Тапай на экран, чтобы регулировать высоту и обходить препятствия,
-            и получай +3 очка за пойманные банки Добрый®! Чтобы очки зачлись в
-            рейтинг, набери минимум 10. Время игры - 60 секунд.
+            Определи какому Лосянте больше соответствует вопрос и
+            выиграй&nbsp;подарок!
+            <br />
+            <br />
+            <b>Участие в игре - 1 балл.</b>
           </p>
         </div>
         <div
-          className="primary-button button appear-bottom delay1s"
+          className="primary-button button-large appear-bottom delay1s"
           onClick={this.startButton_clickHandler}
         >
           Играть
         </div>
 
-        {this.state.userNotAuthorized && (
+        {this.state.userNotAuthorized && !this.state.activityIsOver && (
           <div
             className="signUpWarning appear-zoom"
             onClick={this.signUpWarning_clickHandler}

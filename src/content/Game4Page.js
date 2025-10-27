@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/game4.css";
+import "../css/snow.scss";
 import GamePage from "./GamePage";
-import CircularProgress from "../components/CircularProgress";
 
 class Game4Page extends GamePage {
   constructor(props) {
@@ -12,31 +12,23 @@ class Game4Page extends GamePage {
       this.addColumn(columns);
     }
 
-    let position = this.state.game4.startPosition;
-
     this.state = {
       ...this.state,
-      gameDuration: this.state.game4.gameDuration,
-      stopDuration: this.state.game4.stopDuration,
-      stepDuration: this.state.game4.stepDuration,
-      bonuses: [],
-      power: false,
-      parallax1: 0,
-      parallax2: 0,
-      parallax3: 0,
-      position,
-      columns,
-      heroX: this.state.game4.heroStartPosition,
-      heroY: this.state.desktopBounds.height / 2,
-      heroPower: this.state.game4.pushPower,
+      selected: 0,
     };
 
-    this.game_downHandler = this.game_downHandler.bind(this);
-    this.game_upHandler = this.game_upHandler.bind(this);
+    this.downX = 0;
+    this.moveX = 0;
 
-    this.power = false;
-    this.heroPower = this.state.game4.pushPower;
+    this.cardButton_clickHandler = this.cardButton_clickHandler.bind(this);
+    this.scene_downHandler = this.scene_downHandler.bind(this);
+    this.scene_moveHandler = this.scene_moveHandler.bind(this);
+    this.scene_upHandler = this.scene_upHandler.bind(this);
+    this.selectButton_clickHandler = this.selectButton_clickHandler.bind(this);
   }
+
+  controlGame() {}
+  stepGame() {}
 
   doStart() {
     super.doStart();
@@ -46,66 +38,73 @@ class Game4Page extends GamePage {
     });
   }
 
-  doGame() {
-    let bonuses = this.state.bonuses;
-    let scoreAdded = this.state.scoreAdded;
+  cardButton_clickHandler(event) {
+    console.log(event.target.id);
+  }
 
-    bonuses = bonuses.filter((v) => v.status != "bonus-destroy");
-    for (const bonus of bonuses) {
-      if (bonus.status == "bonus-show") {
-        bonus.life--;
-        if (bonus.life < 0) {
-          bonus.status = "bonus-destroy";
-        }
-        continue;
-      }
-      if (bonus.status == "bonus-on") {
-        bonus.status = "bonus-show";
-        scoreAdded = false;
-        bonus.life = this.state.game4.bonusLife;
-        continue;
-      }
+  selectButton_clickHandler(event) {
+    console.log(this.state.game4.cardSources[this.state.selected].id);
+  }
+
+  scene_downHandler(event) {
+    this.downX = event.clientX;
+  }
+
+  scene_moveHandler(event) {
+    this.moveX = event.clientX;
+  }
+
+  scene_upHandler(event) {
+    if (this.downX > this.moveX + this.state.game4.dragThreshold) {
+      this.setState({
+        ...this.state,
+        selected: Math.min(this.state.selected + 1, 2),
+      });
+    } else if (this.downX < this.moveX - this.state.game4.dragThreshold) {
+      this.setState({
+        ...this.state,
+        selected: Math.max(this.state.selected - 1, 0),
+      });
     }
-
-    this.setState({
-      ...this.state,
-      bonuses,
-    });
-    return true;
   }
 
   render() {
-    let bonuses = [];
-    for (let i = 0; i < this.state.bonuses.length; i++) {
-      let bonus = this.state.bonuses[i];
-      let particles = [];
-      if (bonus.value > 0) {
-        for (let j = 0; j < this.state.particlesCount; j++) {
-          particles.push(<div key={"p" + j} className="particle"></div>);
-        }
-      }
-      bonuses.push(
-        <div key={bonus.id}>
-          <div
-            className="particle-container"
-            style={{
-              left: bonus.cssX,
-              top: bonus.cssY,
-            }}
-          >
-            {particles}
-          </div>
-          <div
-            className="bonus-box bonusUp display"
-            id={bonus.id}
-            style={{
-              left: bonus.cssX,
-              top: bonus.cssY,
-            }}
-          >
-            <div className={"bonus g4" + (bonus.value > 0 ? "" : " negative")}>
-              {bonus.value > 0 ? "+" + bonus.value : bonus.value}
-            </div>
+    let cards = [];
+    for (let i = 0; i < this.state.game4.cardSources.length; i++) {
+      let card = this.state.game4.cardSources[i];
+      cards.push(
+        <div
+          className={"g4-card" + (this.state.selected === i ? " selected" : "")}
+          id={card.id}
+          key={card.id}
+          style={{
+            ...{
+              left: card.x + "px",
+            },
+            ...(this.props.bounds.mobileSize ? {} : { top: card.y + "px" }),
+          }}
+          onClick={this.cardButton_clickHandler}
+        >
+          <div className={"g4-card-layer"}>
+            <div
+              className={"g4-card-image"}
+              style={{
+                ...{
+                  backgroundImage: `url(${card.src})`,
+                },
+                ...(this.props.bounds.mobileSize
+                  ? {}
+                  : { transform: `rotate(${card.rotation}deg)` }),
+              }}
+            ></div>
+            <div
+              className={"g4-card-frame"}
+              style={{
+                ...(this.props.bounds.mobileSize
+                  ? {}
+                  : { transform: `rotate(${card.rotation}deg)` }),
+              }}
+            ></div>
           </div>
         </div>
       );
@@ -114,49 +113,67 @@ class Game4Page extends GamePage {
     let mobileScale =
       this.state.mobileBounds.height / this.state.desktopBounds.height;
 
-    let time = this.state.game4.gameDuration - this.state.countdown;
-
     return (
       <div className="g4 gamePage">
-        <div
-          className="gameScene"
-          onPointerDown={this.game_downHandler}
-          onPointerUp={this.game_upHandler}
-          onPointerLeave={this.game_upHandler}
-        >
+        <div className="pageBg"></div>
+        <div>
+          <div className="pageBg-head-snowflake floating-large"></div>
+          <div className="pageBg-head-snowflake floating-large"></div>
+          <div className="pageBg-head-snowflake floating-large"></div>
+        </div>
+        <div className="pageBg-head slow-pulsing"></div>
+        <div className="screen-snow">
+          {Array.from({ length: 30 }, (_, index) => (
+            <div key={index} className="snowflake" />
+          ))}
+        </div>
+        {!this.props.bounds.mobileSize && (
+          <div className="g4-card-holder">{cards}</div>
+        )}
+        {this.props.bounds.mobileSize && (
           <div
-            className="g4-gameScene"
-            style={{
-              left: this.props.bounds.mobileSize
-                ? (this.state.desktopBounds.width * mobileScale -
-                    this.state.desktopBounds.width) /
-                    2 -
-                  this.state.game4.heroXPosition * mobileScale +
-                  "px"
-                : "50%",
-              top: "50%",
-              transform: this.props.bounds.mobileSize
-                ? "translate(0, -50%)" + " scale(" + mobileScale + ")"
-                : "translate(-50%, -50%)" + "",
-              width: this.state.desktopBounds.width,
-              height: this.state.desktopBounds.height,
-            }}
+            className="g4-card-slider"
+            onPointerDown={this.scene_downHandler}
+            onPointerMove={this.scene_moveHandler}
+            onPointerUp={this.scene_upHandler}
           >
-            {bonuses}
+            <div
+              className="g4-card-slider-container"
+              style={{
+                left: 80 + -this.state.selected * 290,
+              }}
+            >
+              {cards}
+            </div>
+          </div>
+        )}
+        <div className="g4-top-texts appear-top">
+          <div className="g4-select-title">
+            Угадай, кто подарит всем свечи и скажет: «Чтобы у каждого был свой
+            огонёк тепла»?
           </div>
         </div>
-        <div className={"countdown display " + (time < 10 ? " warning" : "")}>
-          <CircularProgress value={1 - time / this.state.game4.gameDuration}>
-            {time}
-          </CircularProgress>
+        <div className="g4-bottom-texts appear-bottom">
+          {!this.props.bounds.mobileSize && (
+            <div className="g4-select-hint">
+              Нажми мышкой на картинку для выбора лосика
+            </div>
+          )}
+          {this.props.bounds.mobileSize && (
+            <>
+              <div className="g4-select-hint">
+                Просматривай карточки, нажми на кнопку для подтверждения выбора
+              </div>
+              <div
+                className="primary-button button-large"
+                onClick={this.selectButton_clickHandler}
+              >
+                Подтвердить
+              </div>
+            </>
+          )}
         </div>
-        <div
-          className={
-            "score display" + (this.state.scoreAdded > 0 ? " impulse" : "")
-          }
-        >
-          {this.state.score}
-        </div>
+
         <div
           className="pageOverlay"
           style={{

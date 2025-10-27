@@ -6,41 +6,192 @@
   color: rgba(0, 255, 255, 0.8) !important;
 }
 
-.g4-gameScene {
+.g4.gamePage .pageBg-head {
+  opacity: 0;
+  animation: pageBg-head-apearing 2000ms ease-out both;
+}
+
+@keyframes pageBg-head-apearing {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.g4-card-holder {
   position: absolute;
-  display: block;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.g4-card {
+  position: absolute;
+  width: 222px;
+  height: 291px;
+  animation: card-floating 3000ms ease-in-out infinite;
+  cursor: pointer;
+}
+
+.mobile .g4-card {
   pointer-events: none;
 }
 
-.g4-gameBonus {
-  position: absolute;
+.g4-card:nth-child(3n + 1) {
+  animation-delay: 0ms;
+}
+.g4-card:nth-child(3n + 2) {
+  animation-delay: -1000ms;
+}
+.g4-card:nth-child(3n + 3) {
+  animation-delay: -2000ms;
+}
 
+@keyframes card-floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.g4-card-layer {
+  left: 0;
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transform: scale(1);
+  transition: all 500ms ease-in-out;
+}
+
+.g4-card:hover .g4-card-layer {
+  transform: scale(1.2);
+  filter: drop-shadow(0px 0px 15px #ffe18e) drop-shadow(0px 0px 15px #ffe18e);
+}
+
+.mobile .g4-card.selected .g4-card-layer {
+  transform: scale(1.4);
+  filter: drop-shadow(0px 0px 10px #ffe18e) drop-shadow(0px 0px 10px #ffe18e);
+}
+
+.g4-card-frame {
+  left: 0;
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url(../images/game4/frame.png);
+  pointer-events: none;
+}
+
+.g4-card-image {
+  position: relative;
+  width: 191px;
+  height: 250px;
+  left: 17px;
+  top: 21px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.g4-top-texts {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  pointer-events: none;
+}
+
+.mobile .g4-top-texts {
+  height: 170px;
+}
+
+.g4-bottom-texts {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile .g4-bottom-texts {
+  bottom: 110px;
+}
+
+.g4-select-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 442px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile .g4-select-title {
+  font-size: 34px;
+}
+
+.g4-select-hint {
+  width: 182px;
+}
+
+.mobile .g4-select-hint {
+  width: 400px;
+}
+
+.mobile .g4-bottom-texts .primary-button {
+  width: 280px;
+}
+
+.g4 .snowflake {
+  background: #ff77d4;
+}
+
+.g4-card-slider {
+  position: absolute;
+  left: 0px;
+  top: 225px;
+  width: 100%;
+  height: 291px;
+  touch-action: none;
+  user-select: none;
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  pointer-events: all;
+}
+.g4-card-slider-container {
+  position: absolute;
   left: 0px;
   top: 0px;
   width: 100%;
   height: 100%;
-  background-size: contain;
-  background-position: center center;
-  background-repeat: no-repeat;
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-
-  font-family: "Forum";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 32px;
-  line-height: 110%;
-  leading-trim: both;
-  text-edge: cap;
-  text-align: center;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 1);
+  transition: all 800ms ease-out;
 }
 
-.g4-negativeBonus {
-  color: rgba(255, 0, 0, 1);
+.g4-active-area {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
 }

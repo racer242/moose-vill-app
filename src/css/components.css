@@ -90,7 +90,7 @@
   background: linear-gradient(180deg, #9d1fe1 0%, #5d279e 100%);
 }
 #Preloader.g4 {
-  background: linear-gradient(180deg, #52bae0 0%, #b7e8fd 100%);
+  background: linear-gradient(180deg, #ff49b8 0%, #dc0008 100%);
 }
 
 .preloader-display {
@@ -120,8 +120,8 @@
 }
 
 .preloader-display.g4 {
-  border: #5d279e 17px solid;
-  border-left-color: #a0e0fc;
+  border: #fff 17px solid;
+  border-left-color: #8755ea;
 }
 
 .preload-spin {

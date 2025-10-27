@@ -10,7 +10,7 @@
 // Установить название игры.
 // Просто переменная - используется внутри этого файла для удобства,
 // передается ниже в конфигурацию, сама на приложение не влияет
-window.gameId = "LIGHTUP"; //"VIBE"; //"SNOWBALL"; //"LIGHTUP";
+window.gameId = "SECRET"; //"VIBE"; //"SNOWBALL"; //"LIGHTUP"; //"SECRET";
 
 // Указать, авторизован пользователь или нет
 // Просто переменная - используется внутри этого файла для удобства,
@@ -99,8 +99,15 @@ function onAppReadyHandler(app) {
         // request2: { url: "/api/TentGame", method: "POST" },
         request2: { url: "/api/TentGame2.json", method: "GET" },
       },
+      4: {
+        id: "SECRET",
+        // request1: { url: "/api/TentGame", method: "POST" },
+        request1: { url: "/api/TentGame1.json", method: "GET" },
+        // request2: { url: "/api/TentGame", method: "POST" },
+        request2: { url: "/api/TentGame2.json", method: "GET" },
+      },
       // Это индекс игр для быстрой идентификации внутри приложения
-      index: { VIBE: 1, SNOWBALL: 2, LIGHTUP: 3 },
+      index: { VIBE: 1, SNOWBALL: 2, LIGHTUP: 3, SECRET: 4 },
     },
     // Обработчик закрытия попапа
     closeHandler: window.closeGamePopup,

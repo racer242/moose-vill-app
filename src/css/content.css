@@ -29,6 +29,7 @@
   justify-content: space-between;
 }
 
+.pageBg-head,
 .pageOverlay,
 .pageBg,
 .screen-snow {
@@ -87,6 +88,10 @@
 
 .g3 .logo-bg {
   background-image: url(../images/game3/logo-bg.svg);
+}
+
+.g4 .logo-bg {
+  background-image: url(../images/game4/logo-bg.svg);
 }
 
 .logo-bg-pulsing {
@@ -506,8 +511,95 @@
   background-image: url(../images/game3/bg-common-mob.jpg);
 }
 
+.g4.mainPage {
+  justify-content: center;
+  padding-bottom: 47px;
+  gap: 60px;
+}
+
+.mobile .g4.mainPage {
+  justify-content: center;
+  padding-bottom: 190px;
+  gap: 105px;
+}
+
+.mobile .g4 .plate {
+  padding: 76px 36px;
+}
+
 .g4 .pageBg {
-  background-color: #7dceed;
+  background: linear-gradient(180deg, #ff49b8 0%, #dc0008 100%);
+}
+
+.g4 .pageBg-head {
+  background-image: url(../images/game4/bg-head.png);
+  background-size: 1248px 702px;
+  background-repeat: no-repeat;
+  background-position: 50% 270px;
+  mix-blend-mode: plus-lighter;
+  opacity: 0.5;
+}
+
+.mobile .g4 .pageBg-head {
+  background-image: url(../images/game4/bg-head.png);
+  background-size: 960px 540px;
+  background-repeat: no-repeat;
+  background-position: 50% 560px;
+  mix-blend-mode: plus-lighter;
+}
+
+.g4 .pageBg-head-snowflake,
+.g4 .pageBg-head-snowflake::before {
+  position: absolute;
+  width: 302px;
+  height: 282px;
+}
+
+.mobile .g4 .pageBg-head-snowflake {
+  display: none;
+}
+
+.g4 .pageBg-head-snowflake::before {
+  content: "";
+  background-size: contain;
+  background-position: center contain;
+  background-repeat: no-repeat;
+  background-image: url(../images/game4/back-snowflake.png);
+}
+
+.g4 .pageBg-head-snowflake:nth-child(1) {
+  left: 27px;
+  top: 134px;
+  animation-delay: 0ms;
+}
+
+.g4 .pageBg-head-snowflake:nth-child(2) {
+  left: 329px;
+  top: 112px;
+  animation-delay: -1000ms;
+}
+.g4 .pageBg-head-snowflake:nth-child(2)::before {
+  transform: rotate(-30deg);
+}
+.g4 .pageBg-head-snowflake:nth-child(3) {
+  left: 631px;
+  top: 134px;
+  animation-delay: -2000ms;
+}
+
+.floating-large {
+  animation: floating-large 3000ms ease-in-out infinite;
+}
+@keyframes floating-large {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(50px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .pageOverlay,
@@ -531,6 +623,7 @@
 
 .g4 .logo {
   display: block;
+  background-image: url(../images/game4/logo.png);
 }
 
 .hint-right,

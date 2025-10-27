@@ -97,6 +97,21 @@
   color: #fff !important;
 }
 
+/* .g4 .primary-button:hover,
+.g4 .primary-button:active {
+  color: #ff0900;
+}
+
+.g4 .primary-button::before,
+.g4 .secondary-button::before {
+  background: linear-gradient(to bottom, #ffffff, #ff0900);
+}
+
+.g4 .primary-button:hover::before,
+.g4 .secondary-button:hover::before {
+  background: #ff0900;
+} */
+
 .button-large {
   padding: 24px 90px;
 }

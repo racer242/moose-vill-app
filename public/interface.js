@@ -102,9 +102,9 @@ function onAppReadyHandler(app) {
       4: {
         id: "SECRET",
         // request1: { url: "/api/TentGame", method: "POST" },
-        request1: { url: "/api/TentGame1.json", method: "GET" },
+        request1: { url: "/api/SecretGame1.json", method: "GET" },
         // request2: { url: "/api/TentGame", method: "POST" },
-        request2: { url: "/api/TentGame2.json", method: "GET" },
+        request2: { url: "/api/SecretGame2.json", method: "GET" },
       },
       // Это индекс игр для быстрой идентификации внутри приложения
       index: { VIBE: 1, SNOWBALL: 2, LIGHTUP: 3, SECRET: 4 },

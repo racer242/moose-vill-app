@@ -55,7 +55,10 @@ class DataManager extends Component {
         ...state,
       });
       if (!this.isLoading) {
-        if (state.requestStart) {
+        if (state.requestCheck) {
+          console.log("DataManager requestCheck");
+          this.requestCheck(state.requestCheck);
+        } else if (state.requestStart) {
           console.log("DataManager requestStart");
           this.requestStart(state.requestStart);
         } else if (state.requestFinish) {
@@ -68,6 +71,16 @@ class DataManager extends Component {
         this.saveStorageData();
       }
     }
+  }
+
+  async requestCheck(action) {
+    await this.load(
+      action.request,
+      action.data,
+      {},
+      "requestCheck",
+      "gameCredentials"
+    );
   }
 
   async requestStart(action) {

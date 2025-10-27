@@ -1,7 +1,11 @@
 import React from "react";
 import "../css/game4.css";
 import "../css/snow.scss";
+import "../css/sparking.scss";
+
 import GamePage from "./GamePage";
+import { setStoreData } from "../actions/appActions";
+import md5 from "md5";
 
 class Game4Page extends GamePage {
   constructor(props) {
@@ -15,6 +19,7 @@ class Game4Page extends GamePage {
     this.state = {
       ...this.state,
       selected: 0,
+      status: "selection",
     };
 
     this.downX = 0;
@@ -30,20 +35,59 @@ class Game4Page extends GamePage {
   controlGame() {}
   stepGame() {}
 
+  registerStart() {
+    if (this.state.userNotAuthorized) return;
+    this.store.dispatch(
+      setStoreData({
+        requestStart: {
+          request: this.state.gameData.request1,
+          data: { play: true, mode: "tip" },
+        },
+      })
+    );
+  }
+
+  registerFinish() {
+    if (this.state.userNotAuthorized) return;
+    let guid = this.state.gameCredentials?.guid;
+    let userCode = this.state.gameCredentials?.userCode;
+    let marks = this.state.score;
+    let hash = md5(userCode + guid + guid + guid + marks);
+    this.store.dispatch(
+      setStoreData({
+        requestFinish: {
+          request: this.state.gameData.request2,
+          data: {
+            mode: "finish",
+            hash,
+            guid,
+            marks,
+          },
+        },
+      })
+    );
+  }
+
   doStart() {
     super.doStart();
     this.setState({
       ...this.state,
-      heroX: this.state.game4.heroXPosition,
     });
   }
 
   cardButton_clickHandler(event) {
-    console.log(event.target.id);
+    this.setState({
+      ...this.state,
+      selected: Number(event.target.id),
+      status: "result",
+    });
   }
 
   selectButton_clickHandler(event) {
-    console.log(this.state.game4.cardSources[this.state.selected].id);
+    this.setState({
+      ...this.state,
+      status: "result",
+    });
   }
 
   scene_downHandler(event) {
@@ -55,43 +99,70 @@ class Game4Page extends GamePage {
   }
 
   scene_upHandler(event) {
-    if (this.downX > this.moveX + this.state.game4.dragThreshold) {
-      this.setState({
-        ...this.state,
-        selected: Math.min(this.state.selected + 1, 2),
-      });
-    } else if (this.downX < this.moveX - this.state.game4.dragThreshold) {
-      this.setState({
-        ...this.state,
-        selected: Math.max(this.state.selected - 1, 0),
-      });
+    if (this.state.status === "selection") {
+      if (this.downX > this.moveX + this.state.game4.dragThreshold) {
+        this.setState({
+          ...this.state,
+          selected: Math.min(this.state.selected + 1, 2),
+        });
+      } else if (this.downX < this.moveX - this.state.game4.dragThreshold) {
+        this.setState({
+          ...this.state,
+          selected: Math.max(this.state.selected - 1, 0),
+        });
+      }
     }
   }
 
   render() {
     let cards = [];
+    let gameCredentials = this.state.gameCredentials ?? {};
     for (let i = 0; i < this.state.game4.cardSources.length; i++) {
       let card = this.state.game4.cardSources[i];
+      let image = gameCredentials["elk" + (i + 1)];
+
+      let style = {
+        ...{
+          left: card.x + "px",
+        },
+        ...(this.props.bounds.mobileSize ? {} : { top: card.y + "px" }),
+      };
+      style =
+        this.state.status === "result"
+          ? {
+              ...style,
+              opacity: this.state.selected === i ? 1 : 0,
+              left: this.props.bounds.mobileSize
+                ? style.left
+                : this.state.selected === i
+                ? 366
+                : style.left,
+              pointerEvents: "none",
+            }
+          : { ...style };
       cards.push(
         <div
-          className={"g4-card" + (this.state.selected === i ? " selected" : "")}
+          className={
+            "g4-card" +
+            (this.state.selected === i &&
+            (this.props.bounds.mobileSize || this.state.status === "result")
+              ? " selected"
+              : "")
+          }
           id={card.id}
           key={card.id}
-          style={{
-            ...{
-              left: card.x + "px",
-            },
-            ...(this.props.bounds.mobileSize ? {} : { top: card.y + "px" }),
-          }}
+          style={style}
           onClick={this.cardButton_clickHandler}
         >
           <div className={"g4-card-layer"}>
             <div
               className={"g4-card-image"}
               style={{
-                ...{
-                  backgroundImage: `url(${card.src})`,
-                },
+                ...(image
+                  ? {
+                      backgroundImage: `url(${image})`,
+                    }
+                  : {}),
                 ...(this.props.bounds.mobileSize
                   ? {}
                   : { transform: `rotate(${card.rotation}deg)` }),
@@ -110,8 +181,12 @@ class Game4Page extends GamePage {
       );
     }
 
-    let mobileScale =
-      this.state.mobileBounds.height / this.state.desktopBounds.height;
+    let sparkParticles = [];
+    if (this.state.status === "result") {
+      for (let i = 0; i < this.state.game4.sparkParticlesCount; i++) {
+        sparkParticles.push(<div key={"p" + i} className="sparking"></div>);
+      }
+    }
 
     return (
       <div className="g4 gamePage">
@@ -127,12 +202,25 @@ class Game4Page extends GamePage {
             <div key={index} className="snowflake" />
           ))}
         </div>
+
+        {this.state.status === "result" && (
+          <div
+            className="sparking-container"
+            style={{
+              left: "50%",
+              top: "50%",
+            }}
+          >
+            {sparkParticles}
+          </div>
+        )}
+
         {!this.props.bounds.mobileSize && (
-          <div className="g4-card-holder">{cards}</div>
+          <div className="g4-card-holder show-zoom">{cards}</div>
         )}
         {this.props.bounds.mobileSize && (
           <div
-            className="g4-card-slider"
+            className="g4-card-slider show-zoom"
             onPointerDown={this.scene_downHandler}
             onPointerMove={this.scene_moveHandler}
             onPointerUp={this.scene_upHandler}
@@ -147,29 +235,41 @@ class Game4Page extends GamePage {
             </div>
           </div>
         )}
+
         <div className="g4-top-texts appear-top">
-          <div className="g4-select-title">
-            Угадай, кто подарит всем свечи и скажет: «Чтобы у каждого был свой
-            огонёк тепла»?
-          </div>
+          <div
+            className="g4-select-title"
+            dangerouslySetInnerHTML={{ __html: gameCredentials?.tip }}
+          ></div>
         </div>
         <div className="g4-bottom-texts appear-bottom">
           {!this.props.bounds.mobileSize && (
-            <div className="g4-select-hint">
-              Нажми мышкой на картинку для выбора лосика
-            </div>
+            <>
+              {this.state.status === "selection" && (
+                <>
+                  <div className="g4-select-hint">
+                    Нажми мышкой на картинку для выбора лосика
+                  </div>
+                </>
+              )}
+            </>
           )}
           {this.props.bounds.mobileSize && (
             <>
-              <div className="g4-select-hint">
-                Просматривай карточки, нажми на кнопку для подтверждения выбора
-              </div>
-              <div
-                className="primary-button button-large"
-                onClick={this.selectButton_clickHandler}
-              >
-                Подтвердить
-              </div>
+              {this.state.status === "selection" && (
+                <>
+                  <div className="g4-select-hint">
+                    Просматривай карточки, нажми на кнопку для подтверждения
+                    выбора
+                  </div>
+                  <div
+                    className="primary-button button-large"
+                    onClick={this.selectButton_clickHandler}
+                  >
+                    Подтвердить
+                  </div>
+                </>
+              )}
             </>
           )}
         </div>

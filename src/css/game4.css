@@ -34,6 +34,7 @@
   height: 291px;
   animation: card-floating 3000ms ease-in-out infinite;
   cursor: pointer;
+  transition: all 500ms ease-out;
 }
 
 .mobile .g4-card {
@@ -78,9 +79,13 @@
   filter: drop-shadow(0px 0px 15px #ffe18e) drop-shadow(0px 0px 15px #ffe18e);
 }
 
+.g4-card.selected .g4-card-layer {
+  transform: scale(1.2);
+  filter: drop-shadow(0px 0px 10px #ffe18e) drop-shadow(0px 0px 10px #ffe18e);
+}
+
 .mobile .g4-card.selected .g4-card-layer {
   transform: scale(1.4);
-  filter: drop-shadow(0px 0px 10px #ffe18e) drop-shadow(0px 0px 10px #ffe18e);
 }
 
 .g4-card-frame {
@@ -104,6 +109,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   pointer-events: none;
+  background-image: url(../images/game4/hero-no.jpg);
 }
 
 .g4-top-texts {

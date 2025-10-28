@@ -89,7 +89,8 @@ class DataManager extends Component {
       action.data,
       {},
       "requestStart",
-      "gameCredentials"
+      "gameCredentials",
+      action.additionalData
     );
   }
 
@@ -99,7 +100,8 @@ class DataManager extends Component {
       action.data,
       {},
       "requestFinish",
-      "gameScores"
+      "gameScores",
+      action.additionalData
     );
   }
 
@@ -114,7 +116,7 @@ class DataManager extends Component {
     this.store.dispatch(storageDataSaved());
   }
 
-  async load(source, data, headers, processId, dataId) {
+  async load(source, data, headers, processId, dataId, additionalData) {
     let JWT;
 
     this.isLoading = true;
@@ -156,7 +158,11 @@ class DataManager extends Component {
           console.log("JWT isn't transferred");
         }
         this.store.dispatch(
-          setStoreData({ [dataId]: response.data.data, [processId]: false })
+          setStoreData({
+            [dataId]: response.data.data,
+            [processId]: false,
+            ...additionalData,
+          })
         );
       } else {
         console.log("Error", response.data.errorText);

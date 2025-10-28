@@ -7,17 +7,42 @@
 }
 
 .g4.gamePage .pageBg-head {
-  opacity: 0;
-  animation: pageBg-head-apearing 2000ms ease-out both;
+  opacity: 1;
+  transition: background-position 600ms ease-in-out;
+  animation: none;
 }
 
-@keyframes pageBg-head-apearing {
-  0% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
+.g4.gamePage .pageBg-head.lifted {
+  opacity: 0.3;
+  background-size: contain;
+  background-position: 50% 0px;
+}
+
+.mobile .g4.gamePage .pageBg-head.lifted {
+  opacity: 0.3;
+  background-size: contain;
+}
+
+.g4.gamePage .pageBg-head.highlighted {
+  opacity: 1 !important;
+}
+
+.g4.gamePage .snowflake-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 1000ms ease-in-out;
+}
+
+.g4-card-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 500ms ease-out;
 }
 
 .g4-card-holder {
@@ -98,6 +123,7 @@
   background-repeat: no-repeat;
   background-image: url(../images/game4/frame.png);
   pointer-events: none;
+  transition: all 500ms ease-in-out;
 }
 
 .g4-card-image {
@@ -110,6 +136,7 @@
   background-repeat: no-repeat;
   pointer-events: none;
   background-image: url(../images/game4/hero-no.jpg);
+  transition: all 500ms ease-in-out;
 }
 
 .g4-top-texts {
@@ -142,6 +169,7 @@
   bottom: 110px;
 }
 
+.g4-select-subtitle,
 .g4-select-title {
   position: absolute;
   top: 50%;
@@ -154,8 +182,13 @@
   justify-content: center;
 }
 
-.mobile .g4-select-title {
-  font-size: 34px;
+.g4-select-subtitle {
+  transform: translate(-50%, 0%);
+  width: 350px;
+}
+
+.mobile .g4-select-subtitle {
+  transform: translate(-50%, -5%);
 }
 
 .g4-select-hint {
@@ -166,7 +199,8 @@
   width: 400px;
 }
 
-.mobile .g4-bottom-texts .primary-button {
+.mobile .g4-bottom-texts .primary-button,
+.mobile .g4-bottom-texts .secondary-button {
   width: 280px;
 }
 
@@ -200,4 +234,59 @@
   top: 0px;
   width: 100%;
   height: 100%;
+}
+
+.g4-prize-container {
+  position: absolute;
+  left: 390px;
+  top: 210px;
+  width: 180px;
+  height: 180px;
+}
+
+.mobile .g4-prize-container {
+  left: 140px;
+  top: 280px;
+  width: 260px;
+  height: 260px;
+}
+
+.g4-prize-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.g4-prize {
+  left: 0;
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  transition: all 100ms;
+}
+
+.g4-prize-sun {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url(../images/game4/prize-sun.png);
+  pointer-events: none;
+  transition: all 1000ms ease-in-out;
+}
+
+.mobile .g4-prize-sun {
+  width: 500px;
+  height: 500px;
 }

@@ -171,6 +171,20 @@
   font-size: 24px;
 }
 
+.g4-select-subtitle {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 135%;
+  text-align: center;
+  color: #6c1100;
+}
+
+.mobile .g4-select-subtitle {
+  font-size: 24px;
+}
+
 .g4-select-hint {
   font-family: "Geologica";
   font-style: normal;

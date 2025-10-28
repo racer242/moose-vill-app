@@ -528,7 +528,13 @@
 }
 
 .g4 .pageBg {
-  background: linear-gradient(180deg, #ff49b8 0%, #dc0008 100%);
+  background: linear-gradient(180deg, #ff49b8 0%, #dc0008 70%);
+  background-size: 100% 200%;
+  transition: all 1000ms ease-in-out;
+}
+
+.g4 .pageBg.changed {
+  background-position: 0% 50%;
 }
 
 .g4 .pageBg-head {
@@ -541,8 +547,8 @@
 }
 
 .mobile .g4 .pageBg-head {
-  background-image: url(../images/game4/bg-head.png);
-  background-size: 960px 540px;
+  background-image: url(../images/game4/bg-head-mob.png);
+  background-size: 540px 960px;
   background-repeat: no-repeat;
   background-position: 50% 560px;
   mix-blend-mode: plus-lighter;

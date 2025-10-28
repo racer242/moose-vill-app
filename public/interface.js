@@ -101,6 +101,8 @@ function onAppReadyHandler(app) {
       },
       4: {
         id: "SECRET",
+        // request0: { url: "/api/TentGame", method: "POST" },
+        request0: { url: "/api/SecretGame0.json", method: "GET" },
         // request1: { url: "/api/TentGame", method: "POST" },
         request1: { url: "/api/SecretGame1.json", method: "GET" },
         // request2: { url: "/api/TentGame", method: "POST" },

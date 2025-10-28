@@ -22,7 +22,7 @@ class Main4Page extends Component {
     });
     this.mounted = true;
     if (!this.started) {
-      this.registerStart();
+      this.registerCheck();
       this.started = true;
     }
   }
@@ -44,12 +44,12 @@ class Main4Page extends Component {
     }
   }
 
-  registerStart() {
+  registerCheck() {
     if (this.state.userNotAuthorized) return;
     this.store.dispatch(
       setStoreData({
         requestCheck: {
-          request: this.state.gameData.request1,
+          request: this.state.gameData.request0,
           data: { play: false },
         },
       })

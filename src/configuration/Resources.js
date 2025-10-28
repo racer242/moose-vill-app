@@ -151,7 +151,23 @@ const resources = {
     require("../images/game3/fireworks/fireworks15.svg"),
     require("../images/game3/fireworks/fireworks16.svg"),
   ],
-  4: [...common],
+  4: [
+    ...common,
+    require("../images/game4/back-snowflake.png"),
+    require("../images/game4/bg-head.png"),
+    require("../images/game4/bg-head-mob.png"),
+    require("../images/game4/frame.png"),
+    require("../images/game4/gift-particle-1.png"),
+    require("../images/game4/gift-particle-2.png"),
+    require("../images/game4/gift-particle-3.png"),
+    require("../images/game4/gift-particle-4.png"),
+    require("../images/game4/gift-particle-5.png"),
+    require("../images/game4/hero-no.jpg"),
+    require("../images/game4/logo.png"),
+    require("../images/game4/logo-bg.svg"),
+    require("../images/game4/prize-sun.png"),
+    require("../images/game4/spark.png"),
+  ],
 };
 
 export default resources;

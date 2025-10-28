@@ -51,6 +51,6 @@
     "sass": "^1.85.1",
     "unique-string": "^3.0.0"
   },
-  "homepage1": "/_game/",
-  "homepage": "."
+  "homepage": "/_game/",
+  "homepage1": "."
 }

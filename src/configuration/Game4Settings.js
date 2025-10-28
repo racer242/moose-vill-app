@@ -24,10 +24,18 @@ const Game4Settings = {
 
   dragThreshold: 20,
 
+  getResultDelay: 2000,
+  showResultDelay: 3000,
+
+  prizeChangeDuration: 300, //ms
+  prizeChangeCount: 2,
+
   startDuration: 500, //ms
   stopDuration: 3000, //ms
   animationDuration: 4000, //ms
-  sparkParticlesCount: 50,
+
+  sparkParticlesCount: 30,
+  giftParticlesCount: 30,
 };
 
 export default Game4Settings;

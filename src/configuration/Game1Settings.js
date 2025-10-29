@@ -157,13 +157,15 @@ const Game1Settings = {
     },
   ],
 
+  startObjCount: 10,
+
   newCount: 2,
   gridSize: 10,
   transitionDuration: 1000, //ms
 
   bonusLife: 3,
 
-  stepDuration: 1000, //ms
+  stepDuration: 1100, //ms - не должно совпадать с 1000
   gameDuration: 60, //s
   stopDuration: 2000, //ms
 };

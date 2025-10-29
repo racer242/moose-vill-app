@@ -14,7 +14,7 @@ class Game1Page extends GamePage {
       bonuses: [],
       gameDuration: this.state.game1.gameDuration,
       stopDuration: this.state.game1.stopDuration,
-      stepDuration: this.state.game1.stepDuration / 10,
+      stepDuration: this.state.game1.stepDuration,
     };
 
     this.initCount = 0;
@@ -23,12 +23,30 @@ class Game1Page extends GamePage {
   }
 
   doStart() {
-    this.initTimer = setTimeout(() => {
-      this.setState({
-        ...this.state,
-        stepDuration: this.state.game1.stepDuration,
+    let objects = this.state.objects;
+    let objSources = this.state.game1.objSources;
+    for (let i = 0; i < this.state.game1.startObjCount; i++) {
+      let x = Math.floor(Math.random() * this.state.game1.gridSize);
+      let y = Math.floor(Math.random() * this.state.game1.gridSize);
+      let objSource = objSources[Math.floor(Math.random() * objSources.length)];
+      objects.push({
+        id: "obj" + this.counter++,
+        x,
+        y,
+        baseX: x,
+        baseY: y,
+        ...this.updateObjBounds({ x, y }),
+        type: objSource,
+        status: "obj-show",
+        life:
+          objSource.lifeCount * Math.random() -
+          Math.random() * objSource.lifeProb,
       });
-    }, 300);
+    }
+    this.setState({
+      ...this.state,
+      objects,
+    });
   }
 
   updateObjBounds(obj) {
@@ -91,7 +109,7 @@ class Game1Page extends GamePage {
         obj.y = obj.baseY + Math.sign(Math.random() * 1 - 0.5) * obj.type.speed;
 
         this.updateObjBounds(obj);
-        if (obj.life > obj.type.lifeCount + Math.random() * obj.type.lifeProb) {
+        if (obj.life > obj.type.lifeCount) {
           obj.status = "obj-off";
         }
       }
@@ -107,6 +125,8 @@ class Game1Page extends GamePage {
       let found = objects.filter((v) => v.baseX == x && v.baseY == y);
       if (found.length > 0) continue;
 
+      let objSource = objSources[Math.floor(Math.random() * objSources.length)];
+
       objects.push({
         id: "obj" + this.counter++,
         x,
@@ -114,9 +134,9 @@ class Game1Page extends GamePage {
         baseX: x,
         baseY: y,
         ...this.updateObjBounds({ x, y }),
-        type: objSources[Math.floor(Math.random() * objSources.length)],
+        type: objSource,
         status: "obj-on",
-        life: 0,
+        life: -Math.random() * objSource.lifeProb,
       });
     }
 

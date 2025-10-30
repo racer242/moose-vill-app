@@ -77,7 +77,7 @@ class Main4Page extends Component {
     return (
       <div className="mainPage g4">
         <div className="pageBg"></div>
-        <div>
+        <div className="pageBg-head-snowflake-container">
           <div className="pageBg-head-snowflake floating-large"></div>
           <div className="pageBg-head-snowflake floating-large"></div>
           <div className="pageBg-head-snowflake floating-large"></div>
@@ -91,23 +91,29 @@ class Main4Page extends Component {
           <h1 className="caps">Тайный Лосянта</h1>
         </div>
         <div className="plate appear-top delay500ms">
-          <p>Угадай Тайного лосянту!</p>
+          <p>Угадай, кто твой Тайный Лосянта!</p>
           <p className="orange">
-            Определи какому Лосянте больше соответствует вопрос и
-            выиграй&nbsp;подарок!
+            Один из&nbsp;жителей Лосьвилля приготовил для&nbsp;тебя подарок!
+            Определи, какому из&nbsp;трех лосиков больше всего соответствует
+            заданный вопрос, и выиграй приз!
             <br />
             <br />
-            <b>Участие в игре - 1 балл.</b>
+            <b>Участие в&nbsp;игре&nbsp;–&nbsp;1&nbsp;балл.</b>
           </p>
         </div>
-        {this.state.gameCredentials?.attemptsLeft > 0 && (
-          <div
-            className="primary-button button-large appear-bottom delay1s"
-            onClick={this.startButton_clickHandler}
-          >
-            Играть
-          </div>
-        )}
+        <div
+          className="primary-button button-large appear-bottom delay1s"
+          onClick={this.startButton_clickHandler}
+          style={{
+            visibility:
+              this.state.gameCredentials?.attemptsLeft > 0 &&
+              !this.state.activityIsOver
+                ? "visible"
+                : "hidden",
+          }}
+        >
+          Играть
+        </div>
 
         {this.state.userNotAuthorized && !this.state.activityIsOver && (
           <div
@@ -115,8 +121,12 @@ class Main4Page extends Component {
             onClick={this.signUpWarning_clickHandler}
           >
             <span className="signUpLink">Зарегистрируйся</span> в Акции, чтобы
-            сохранить результат игры
+            сыграть в игру!
           </div>
+        )}
+
+        {this.state.activityIsOver && (
+          <div className="signUpWarning appear-zoom">Акция закончилась...</div>
         )}
       </div>
     );

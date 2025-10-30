@@ -113,13 +113,13 @@ const Game1Settings = {
       lifeCount: 6,
       speed: 0.05,
     },
-    {
-      src: require("../images/game1/objects/bad/o4.png"),
-      bonus: -1,
-      lifeProb: 5,
-      lifeCount: 6,
-      speed: 0.05,
-    },
+    // {
+    //   src: require("../images/game1/objects/bad/o4.png"),
+    //   bonus: -1,
+    //   lifeProb: 5,
+    //   lifeCount: 6,
+    //   speed: 0.05,
+    // },
     {
       src: require("../images/game1/objects/bad/o5.png"),
       bonus: -1,
@@ -141,13 +141,13 @@ const Game1Settings = {
       lifeCount: 6,
       speed: 0.05,
     },
-    {
-      src: require("../images/game1/objects/bad/o9.png"),
-      bonus: -1,
-      lifeProb: 5,
-      lifeCount: 6,
-      speed: 0.05,
-    },
+    // {
+    //   src: require("../images/game1/objects/bad/o9.png"),
+    //   bonus: -1,
+    //   lifeProb: 5,
+    //   lifeCount: 6,
+    //   speed: 0.05,
+    // },
     {
       src: require("../images/game1/objects/bad/o10.png"),
       bonus: -1,

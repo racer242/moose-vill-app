@@ -511,21 +511,21 @@
   background-image: url(../images/game3/bg-common-mob.jpg);
 }
 
-.g4.mainPage {
+/* .g4.mainPage {
   justify-content: center;
   padding-bottom: 47px;
   gap: 60px;
-}
+} */
 
-.mobile .g4.mainPage {
+/* .mobile .g4.mainPage {
   justify-content: center;
   padding-bottom: 190px;
   gap: 105px;
-}
+} */
 
-.mobile .g4 .plate {
+/* .mobile .g4 .plate {
   padding: 76px 36px;
-}
+} */
 
 .g4 .pageBg {
   background: linear-gradient(180deg, #ff49b8 0%, #dc0008 70%);
@@ -552,6 +552,12 @@
   background-repeat: no-repeat;
   background-position: 50% 560px;
   mix-blend-mode: plus-lighter;
+}
+
+.g4 .pageBg-head-snowflake-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 .g4 .pageBg-head-snowflake,

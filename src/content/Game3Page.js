@@ -438,6 +438,28 @@ class Game3Page extends GamePage {
           </>
         )}
 
+        {this.state.isPlaying && (
+          <div
+            className="g3-hint appear-bottom message1"
+            style={{ animationDuration: "500ms" }}
+          >
+            Запомни последовательность, в которой загораются огоньки
+          </div>
+        )}
+
+        {this.state.isRepeating && (
+          <div
+            className="g3-hint appear-bottom message2"
+            style={{
+              animationDuration: "500ms",
+              opacity: this.state.win ? 0 : 1,
+            }}
+          >
+            Повторяй последовательность, пока не угадаешь полностью верно тройку
+            огоньков
+          </div>
+        )}
+
         <div
           className="pageOverlay"
           style={{

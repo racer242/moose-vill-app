@@ -212,3 +212,12 @@
   font-size: 20px;
   line-height: 28px;
 }
+
+.g-checkbox p {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 145%;
+  color: #5d279e;
+}

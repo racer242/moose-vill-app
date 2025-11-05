@@ -358,6 +358,26 @@
   }
 }
 
+.show-bottom {
+  animation: show-bottom 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-fill-mode: backwards;
+  will-change: contents;
+  visibility: hidden;
+}
+@keyframes show-bottom {
+  0% {
+    transform: translateY(50px);
+    visibility: hidden;
+  }
+  1% {
+    transform: translateY(50px);
+    visibility: visible;
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 .infinite {
   animation-iteration-count: infinite !important;
 }

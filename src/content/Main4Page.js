@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { setStoreData } from "../actions/appActions";
+import { ReactComponent as CheckboxOff } from "../images/checkbox-off.svg";
+import { ReactComponent as CheckboxOn } from "../images/checkbox-on.svg";
 
 class Main4Page extends Component {
   constructor(props) {
@@ -11,9 +13,13 @@ class Main4Page extends Component {
       };
     } else this.state = {};
 
+    this.state.warningChecked = false;
+
     this.startButton_clickHandler = this.startButton_clickHandler.bind(this);
     this.signUpWarning_clickHandler =
       this.signUpWarning_clickHandler.bind(this);
+    this.warningCheckButton_clickHandler =
+      this.warningCheckButton_clickHandler.bind(this);
   }
 
   componentDidMount() {
@@ -57,17 +63,28 @@ class Main4Page extends Component {
   }
 
   startButton_clickHandler(event) {
-    this.store.dispatch(
-      setStoreData({
-        currentPage: "game",
-      })
-    );
+    if (!this.state.warningChecked) {
+      this.state.playWithoutConfirmation();
+    } else {
+      this.store.dispatch(
+        setStoreData({
+          currentPage: "game",
+        })
+      );
+    }
   }
 
   signUpWarning_clickHandler(event) {
     if (this.state.signUpHandler) {
       this.state.signUpHandler();
     }
+  }
+
+  warningCheckButton_clickHandler(event) {
+    this.setState({
+      ...this.setState,
+      warningChecked: !this.state.warningChecked,
+    });
   }
 
   render() {
@@ -101,8 +118,29 @@ class Main4Page extends Component {
             <b>Участие в&nbsp;игре&nbsp;–&nbsp;1&nbsp;балл.</b>
           </p>
         </div>
+
         <div
-          className="primary-button button-large appear-bottom delay1s"
+          className="g-checkbox appear-bottom delay500ms"
+          onClick={this.warningCheckButton_clickHandler}
+          style={{
+            visibility:
+              this.state.gameCredentials?.attemptsLeft > 0 &&
+              !this.state.activityIsOver
+                ? "visible"
+                : "hidden",
+          }}
+        >
+          {this.state.warningChecked ? <CheckboxOn /> : <CheckboxOff />}
+          <p>
+            Подтверждаю списание <b>1 балла</b>
+          </p>
+        </div>
+
+        <div
+          className={
+            "primary-button button-large show-bottom delay1s" +
+            (this.state.warningChecked ? "" : " disabled")
+          }
           onClick={this.startButton_clickHandler}
           style={{
             visibility:

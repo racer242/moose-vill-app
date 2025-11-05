@@ -68,6 +68,19 @@
   cursor: default;
 }
 
+.primary-button.disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.primary-button.disabled:hover::before {
+  background: linear-gradient(to bottom, #ffffff, #c44eff);
+}
+.primary-button:hover {
+  color: #5d279e;
+  background: #ffffff;
+}
+
 .secondary-button {
   color: #fff;
   background: none;
@@ -144,4 +157,22 @@
   flex-direction: column;
   flex-direction: column-reverse;
   gap: 14px;
+}
+
+.g-checkbox {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  padding: 10px;
+
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+
+  cursor: pointer;
 }

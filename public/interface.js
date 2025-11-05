@@ -40,6 +40,13 @@ window.signUp = function () {
   console.log("signUp");
 };
 
+// Также функция для использования внутри этого файла, заглушка
+// Имитирует вызов тостера при событии, когда пользователь нажал Играть
+// без подтверждения
+window.playWithoutConfirmation = function () {
+  console.log("playWithoutConfirmation");
+};
+
 // Функция инициализации приложения. Вызывается из обработчика в Index.html,
 // см. <div id="root" class="game" oninit="onAppReadyHandler">
 function onAppReadyHandler(app) {
@@ -117,6 +124,8 @@ function onAppReadyHandler(app) {
     registerHandler: window.registerBill,
     // Обработчик перехода к регистрации пользователя
     signUpHandler: window.signUp,
+    // Обработчик попытки игры без подтверждения
+    playWithoutConfirmation: window.playWithoutConfirmation,
     // Значение ширины окна, при котором происходит переключение на мобильную версию
     switchToMobileWidth: 720,
     // Указать, авторизован пользователь или нет

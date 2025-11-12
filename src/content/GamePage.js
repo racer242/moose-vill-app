@@ -185,7 +185,8 @@ class GamePage extends Component {
 
   closeButton_clickHandler(event) {
     this.stopGame();
-    this.store.dispatch(setStoreData({ currentPage: "main" }));
+    // this.store.dispatch(setStoreData({ currentPage: "main" }));
+    this.state.closeHandler();
   }
 
   render() {

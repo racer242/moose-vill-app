@@ -1,5 +1,5 @@
 $d: 15px;
-$s: 400px;
+$s: 10px;
 
 .g4-gifting-container {
   position: absolute;
@@ -14,7 +14,7 @@ $s: 400px;
   animation-name: gift-shoot, gift-fade;
   border-radius: $d;
 
-  @for $i from 0 to 30 {
+  @for $i from 0 to 15 {
     $t: (1 + 0.1 * random(10)) * 900ms;
 
     $giftNum: random(5);
@@ -22,11 +22,15 @@ $s: 400px;
     $sizeAdd: random(5) * $giftNum * 2px;
     $finalSize: $d + $sizeAdd;
 
+    $rotateDeg: $i * (360/15);
+
     &:nth-child(#{$i + 1}) {
       width: $finalSize;
       height: $finalSize;
       border-radius: $finalSize;
-      transform: translate(random($s) * 1px - $s/2, random($s) * 1px - $s/2);
+      // transform: translate(random($s) * 1px - $s/2, random($s) * 1px - $s/2);
+      transform: rotate(#{$rotateDeg}deg) translateY((200 + random($s)) * 1px);
+
       background-image: url("../images/game4/gift-particle-#{$giftNum}.png");
       background-size: contain;
       animation-duration: $t;

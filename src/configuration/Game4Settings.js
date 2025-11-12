@@ -35,7 +35,7 @@ const Game4Settings = {
   animationDuration: 4000, //ms
 
   sparkParticlesCount: 30,
-  giftParticlesCount: 30,
+  giftParticlesCount: 15,
 };
 
 export default Game4Settings;
